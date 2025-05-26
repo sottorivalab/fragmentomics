@@ -1,16 +1,15 @@
 Package: fragmentomics
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Analyze data from pipeline nf-fragmentomics
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Davide", "Rambladi",
+      email = "davide.rambaldi@gmail.com",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: see README at https://github.com/sottorivalab/fragmentomics
+License: MIT
 Encoding: UTF-8
 LazyData: true
