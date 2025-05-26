@@ -13,6 +13,8 @@ Description: see README at https://github.com/sottorivalab/fragmentomics
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
 Imports: 
   stringr, 
   tibble, 
@@ -20,3 +22,4 @@ Imports:
   ggplot2, 
   readr, 
   jsonlite
+

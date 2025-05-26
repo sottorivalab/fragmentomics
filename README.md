@@ -10,3 +10,13 @@ This package analyze data coming out from pipeline nf-fragmentomics: https://git
 ## Containers
 
 ## Usage
+
+## Development
+
+Using roxygen2 for documentation:
+
+To rebuild docs:
+
+```
+devtools::document()
+```
