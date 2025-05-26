@@ -13,3 +13,10 @@ Description: see README at https://github.com/sottorivalab/fragmentomics
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+  stringr, 
+  tibble, 
+  dplyr, 
+  ggplot2, 
+  readr, 
+  jsonlite
