@@ -10,6 +10,6 @@ Authors@R: c(
     )
   )
 Description: see README at https://github.com/sottorivalab/fragmentomics
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
