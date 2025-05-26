@@ -21,6 +21,11 @@ To rebuild docs:
 devtools::document()
 ```
 
+Verify devtools with:
+
+```
+devtools::has_devel()
+```
 
 
 
