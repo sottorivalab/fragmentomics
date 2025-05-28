@@ -21,7 +21,8 @@ Imports:
   dplyr, 
   ggplot2, 
   readr, 
-  jsonlite
+  jsonlite,
+  tidyr
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

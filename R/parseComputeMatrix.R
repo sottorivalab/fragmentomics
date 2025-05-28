@@ -16,7 +16,7 @@ parseComputeMatrix <- function(file) {
   }
 
   # Read the file, skip first line (is json data)
-  data <- tibble::as_tibble(read.delim(file, header = FALSE, skip = 1))
+  data <- tibble::as_tibble(utils::read.delim(file, header = FALSE, skip = 1))
 
   # Check if the data is empty
   if (nrow(data) == 0) {
@@ -48,7 +48,7 @@ parseComputeMatrix <- function(file) {
     lookup[target] = source
   }
 
-  data <- dplyr::rename(data, all_of(lookup))
+  data <- dplyr::rename(data, dplyr::all_of(lookup))
 
   # Remove NaN
   data <- data |> dplyr::mutate_all(function(x) ifelse(is.nan(x), NA, x))

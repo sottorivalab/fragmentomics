@@ -9,7 +9,7 @@ peakPlot <- function(data) {
   # labels
   label.pos <- -(max(data[['average']]$bin) * .1)
   # peak length
-  peak.length <- tibble(
+  peak.length <- tibble::tibble(
     x=max(data[['average']]$bin),
     y=c(
       data[['stats']]$reference_point_coverage,
@@ -18,21 +18,29 @@ peakPlot <- function(data) {
   )
   # plot
   # plot raw signal
-  g1 <- ggplot() +
+  g1 <- ggplot2::ggplot() +
     # composite coverage
-    geom_line(data=data[['average']],aes(y=coverage, x=bin)) +
+    ggplot2::geom_line(
+      data=data[['average']],
+      ggplot2::aes(y=coverage, x=bin)
+    ) +
     # integration data
-    geom_point(data=data[['integration']],aes(x = x, y = y, color=above), size = .2, alpha = .5) +
-    scale_color_manual(values=c("#D3D3D3", "#56B4E9")) +
+    ggplot2::geom_point(
+      data=data[['integration']],
+      ggplot2::aes(x = x, y = y, color=above), 
+      size = .2, 
+      alpha = .5
+    ) +
+    ggplot2::scale_color_manual(values=c("#D3D3D3", "#56B4E9")) +
     # background mean
-    geom_hline(yintercept = data[['stats']]$background_mean, color="#6082B6", linetype = 'dotted') +
-    geom_text(aes(label.pos,data[['stats']]$background_mean,label = "background"), color="#6082B6", size = 2.5, vjust = -1) +
-    geom_rect(aes(xmin = 0,xmax = data[['stats']]$background_left_limit,  ymin=min(data[['average']]$coverage),ymax=max(data[['average']]$coverage)),
+    ggplot2::geom_hline(yintercept = data[['stats']]$background_mean, color="#6082B6", linetype = 'dotted') +
+    ggplot2::geom_text(ggplot2::aes(label.pos,data[['stats']]$background_mean,label = "background"), color="#6082B6", size = 2.5, vjust = -1) +
+    ggplot2::geom_rect(ggplot2::aes(xmin = 0,xmax = data[['stats']]$background_left_limit,  ymin=min(data[['average']]$coverage),ymax=max(data[['average']]$coverage)),
       color="#6082B6",
       alpha = .15
     ) +
-    geom_rect(
-      aes(
+    ggplot2::geom_rect(
+      ggplot2::aes(
         xmin = data[['stats']]$background_right_limit,
         xmax = max(data[['average']]$bin),
         ymin=min(data[['average']]$coverage),
@@ -42,14 +50,14 @@ peakPlot <- function(data) {
       alpha = .15
     ) +
     # reference coverage
-    geom_hline(yintercept = data[['stats']]$reference_point_coverage, color="#6082B6", linetype = 'dotted') +
-    geom_text(aes(label.pos,data[['stats']]$reference_point_coverage,label = "reference"), size = 2.5, vjust = 1, color="#6082B6") +
+    ggplot2::geom_hline(yintercept = data[['stats']]$reference_point_coverage, color="#6082B6", linetype = 'dotted') +
+    ggplot2::geom_text(ggplot2::aes(label.pos,data[['stats']]$reference_point_coverage,label = "reference"), size = 2.5, vjust = 1, color="#6082B6") +
     # central coverage
-    geom_hline(yintercept = data[['stats']]$central_coverage, color="orange", linetype = 'dotted') +
-    geom_text(aes(label.pos,data[['stats']]$central_coverage,label = "central"), size = 2.5, vjust = -1, color="orange") +
+    ggplot2::geom_hline(yintercept = data[['stats']]$central_coverage, color="orange", linetype = 'dotted') +
+    ggplot2::geom_text(ggplot2::aes(label.pos,data[['stats']]$central_coverage,label = "central"), size = 2.5, vjust = -1, color="orange") +
     # central coverage limits
-    geom_rect(
-      aes(
+    ggplot2::geom_rect(
+      ggplot2::aes(
         xmin = data[['stats']]$central_coverage_bin_min,
         xmax = data[['stats']]$central_coverage_bin_max,
         ymin=min(data[['average']]$coverage),
@@ -60,11 +68,11 @@ peakPlot <- function(data) {
       fill="orange"
     ) +
     # average coverage
-    geom_hline(yintercept = data[['stats']]$average_coverage, color="red", linetype = 'dotted') +
-    geom_text(aes(label.pos,data[['stats']]$average_coverage,label = "average"), size = 2.5, vjust = -1, color="red") +
+    ggplot2::geom_hline(yintercept = data[['stats']]$average_coverage, color="red", linetype = 'dotted') +
+    ggplot2::geom_text(ggplot2::aes(label.pos,data[['stats']]$average_coverage,label = "average"), size = 2.5, vjust = -1, color="red") +
     # average coverage limits
-    geom_rect(
-      aes(
+    ggplot2::geom_rect(
+      ggplot2::aes(
         xmin = data[['stats']]$average_coverage_bin_min,
         xmax = data[['stats']]$average_coverage_bin_max,
         ymin=min(data[['average']]$coverage),
@@ -75,12 +83,12 @@ peakPlot <- function(data) {
       fill="red"
     ) +
     # length
-    geom_point(data=peak.length, aes(x=x, y=y), color="green", size=1) +
-    geom_line(data=peak.length, aes(x=x, y=y), color="green", linetype="dashed") +
+    ggplot2::geom_point(data=peak.length, ggplot2::aes(x=x, y=y), color="green", size=1) +
+    ggplot2::geom_line(data=peak.length, ggplot2::aes(x=x, y=y), color="green", linetype="dashed") +
     # labels
-    xlab(data[['stats']]$target_label) +
-    ylab(data[['stats']]$signal_label) +
-    ggtitle(
+    ggplot2::xlab(data[['stats']]$target_label) +
+    ggplot2::ylab(data[['stats']]$signal_label) +
+    ggplot2::ggtitle(
       paste("Composite coverage: ", data[['stats']]$target_label, "on", data[['stats']]$signal_label, sep=" "),
       subtitle = paste(
         "reference=",
@@ -97,12 +105,12 @@ peakPlot <- function(data) {
       )
     ) +
     # FIXME make it relative to number of bins
-    scale_x_continuous(
+    ggplot2::scale_x_continuous(
       "Position relative to referencePoint (bp)",
       breaks = c(0,100,200,300,400,500,600,700,800),
       labels = c("-4kb","-3kb","-2kb","-1kb","0","1kb","2kb","3kb","4kb")
     ) +
-    theme(legend.position = "none")
+    ggplot2::theme(legend.position = "none")
   
   # return plot
   return(g1)

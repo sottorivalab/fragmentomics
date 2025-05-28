@@ -18,12 +18,12 @@ peakStats <- function(data, signal_label=NULL, target_label=NULL, source_label=N
 
   # if not signal label use sample_labels
   if (is.null(signal_label)) {
-    signal_label <- as.character(data |> select(sample_labels) |> unique())
+    signal_label <- as.character(data |> dplyr::select(sample_labels) |> unique())
   }
 
   # if not target_labels use file
   if (is.null(target_label)) {
-    target_label <- as.character(data |> select(file) |> unique())
+    target_label <- as.character(data |> dplyr::select(file) |> unique())
   }
 
   # if not source_label use NA
@@ -34,7 +34,7 @@ peakStats <- function(data, signal_label=NULL, target_label=NULL, source_label=N
   # average data
   bins <- data |> dplyr::select(!(file:strand))
   average.data <- bins |>
-    dplyr::summarise(across(everything(), \(x) mean(x, na.rm = TRUE))) |>
+    dplyr::summarise(dplyr::across(dplyr::everything(), \(x) mean(x, na.rm = TRUE))) |>
     tidyr::pivot_longer(colnames(bins)) |>
     dplyr::rename(bin="name", coverage="value") |>
     dplyr::mutate(name = bin, .before=bin) |>
@@ -77,8 +77,8 @@ peakStats <- function(data, signal_label=NULL, target_label=NULL, source_label=N
   average.coverage <- mean(average.coverage.data$coverage)
 
   # monte carlo integration
-  x1 <- runif(rpoints, min=1, max=nrow(average.data))
-  y1 <- runif(rpoints, min=min(average.data$coverage) , max=max(average.data$coverage))
+  x1 <- stats::runif(rpoints, min=1, max=nrow(average.data))
+  y1 <- stats::runif(rpoints, min=min(average.data$coverage) , max=max(average.data$coverage))
   random.points <- tibble::tibble(x=x1,y=y1) |> dplyr::arrange(x)
 
   # left join, this expand the data to N=random.points, annotate the points above and below
@@ -97,7 +97,7 @@ peakStats <- function(data, signal_label=NULL, target_label=NULL, source_label=N
   peak.relative <- 1 - reference.point$relative
 
   # update table
-  peak.stats <- tibble(
+  peak.stats <- tibble::tibble(
       signal_label = signal_label,
       target_label = target_label,
       source_label = source_label,

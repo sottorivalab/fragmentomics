@@ -1,0 +1,14 @@
+utils::globalVariables(
+  c(
+    "above",
+    "bin",
+    "bin_size",
+    "coverage",
+    "name",
+    "sample_labels",
+    "strand",
+    "x",
+    "y",
+    "closest"
+  )
+)
