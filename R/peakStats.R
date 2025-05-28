@@ -13,6 +13,7 @@
 #' @param rpoints The number of random points to use for Monte Carlo integration, defaults to 10000
 #' @return A list containing the peak statistics, integration data, and average data
 #'
+#' @export
 
 peakStats <- function(data, signal_label=NULL, target_label=NULL, source_label=NULL, left=50, right=50, central=30, average=1000, rpoints=10000) {
 

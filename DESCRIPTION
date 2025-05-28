@@ -9,7 +9,7 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: see README at https://github.com/sottorivalab/fragmentomics
+Description: Analyze data from pipeline nf-fragmentomics see also README at https://github.com/sottorivalab/fragmentomics .
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

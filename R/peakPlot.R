@@ -4,7 +4,8 @@
 #'
 #' @param data A data frame containing the data to be plotted.
 #' @return A ggplot object.
-
+#'
+#' @export
 peakPlot <- function(data) {
   # labels
   label.pos <- -(max(data[['average']]$bin) * .1)
@@ -27,8 +28,8 @@ peakPlot <- function(data) {
     # integration data
     ggplot2::geom_point(
       data=data[['integration']],
-      ggplot2::aes(x = x, y = y, color=above), 
-      size = .2, 
+      ggplot2::aes(x = x, y = y, color=above),
+      size = .2,
       alpha = .5
     ) +
     ggplot2::scale_color_manual(values=c("#D3D3D3", "#56B4E9")) +
@@ -111,7 +112,7 @@ peakPlot <- function(data) {
       labels = c("-4kb","-3kb","-2kb","-1kb","0","1kb","2kb","3kb","4kb")
     ) +
     ggplot2::theme(legend.position = "none")
-  
+
   # return plot
   return(g1)
 }

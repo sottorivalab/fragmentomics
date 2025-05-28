@@ -8,6 +8,7 @@
 #'  2. columns 24-29 are chr, start, end, name, score, strand
 #'  3. columns 30+ are bins with values
 #'
+#' @export
 parseComputeMatrix <- function(file) {
 
   # Check if the file exists

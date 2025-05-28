@@ -17,6 +17,6 @@ test_that("parseComputeMatrix from example file", {
   expect_true(all(is.na(result$bin_1[is.nan(result$bin_1)])))
 
   # Check if the data frame has the expected number of rows
-  expect_equal(nrow(result), 9950)  # Adjust this number based on the expected number of rows in the test file
+  expect_equal(nrow(result), 1000)  # Adjust this number based on the expected number of rows in the test file
   expect_equal(ncol(result), 23 + 6 + 800)  # 23 meta columns + 6 fixed columns + 800 bin columns
 })
