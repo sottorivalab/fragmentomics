@@ -1,3 +1,14 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+test_that("peakStats works", {
+  test_file <- system.file("extdata", "test_CTCF_compute_matrix.gz", package = "fragmentomics")
+  data <- parseComputeMatrix(test_file)
+
+  # Test with default parameters
+  result <- peakStats(data)
+  
+  # Check if the result is a data frame
+  expect_true(is.list(result))
+  
+  # Check if the expected columns are present
+  expect_true(all(c("name", "bin", "coverage", "relative", "mean") %in% colnames(result[['average']])))
+
 })
