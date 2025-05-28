@@ -41,9 +41,10 @@ peakStats <- function(data, signal_label=NULL, target_label=NULL, source_label=N
     dplyr::mutate(bin = dplyr::row_number(), .after=name)
 
   # calculate the extremes where left is X and right is L-Y
-  mymax <- nrow(average.data) - right
+  background.left.limit <- left
+  background.right.limit <- nrow(average.data) - right
   background.data <- average.data |>
-    dplyr::filter(bin <= left | bin >= mymax)
+    dplyr::filter(bin <= background.left.limit | bin >= background.right.limit)
   background.mean <- mean(background.data$coverage)
 
   # add relative signal
@@ -102,6 +103,8 @@ peakStats <- function(data, signal_label=NULL, target_label=NULL, source_label=N
       source_label = source_label,
       integration = montecarlo.integration,
       background_mean = background.mean,
+      background_left_limit = background.left.limit,
+      background_right_limit = background.right.limit,
       central_bin =central.bin,
       reference_point_coverage = reference.point$coverage,
       reference_point_relative = reference.point$relative,
