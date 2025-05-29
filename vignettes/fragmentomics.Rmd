@@ -1,0 +1,40 @@
+---
+title: "fragmentomics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fragmentomics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Fragmentomics R package
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## SETUP
+
+```{r setup}
+library(fragmentomics)
+```
+
+## Example
+
+Simple example using data provided in the package. 
+
+```{r example}
+example_file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+matrix_data <- parse_compute_matrix(example_file)
+peak_data <- peak_stats(matrix_data)
+```
+
+Plot:
+
+```{r, fig.width=10, fig.height=10}
+peak_plot(peak_data)
+```
+
