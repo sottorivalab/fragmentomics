@@ -10,7 +10,7 @@
 #'  3. columns 30+ are bins with values
 #'
 #' @export
-parseComputeMatrix <- function(file) {
+parse_compute_matrix <- function(file) {
 
   # Check if the file exists
   if (!file.exists(file)) {
@@ -26,7 +26,9 @@ parseComputeMatrix <- function(file) {
   }
 
   # get headers
-  headers <- jsonlite::fromJSON(stringr::str_remove(readr::read_lines(file, n_max = 1), "@"))
+  headers <- jsonlite::fromJSON(
+    stringr::str_remove(readr::read_lines(file, n_max = 1), "@")
+  )
 
   # rename position columns
   lookup <- c(
@@ -40,14 +42,14 @@ parseComputeMatrix <- function(file) {
 
   # Check if the first six columns are present
   if (ncol(data) < 6) {
-    stop("The file does not contain enough columns for chromosome, start, end, name, score, and strand.")
+    stop("The file does not contain enough columns!")
   }
 
   bins <- colnames(data)[7:length(colnames(data))]
-  for (i in 1:length(bins)) {
-    source = bins[i]
-    target = paste("bin_",i, sep="")
-    lookup[target] = source
+  for (i in seq_along(bins)) {
+    source <- bins[i]
+    target <- paste("bin_", i, sep = "")
+    lookup[target] <- source
   }
 
   data <- dplyr::rename(data, dplyr::all_of(lookup))
@@ -61,30 +63,27 @@ parseComputeMatrix <- function(file) {
     upstream = headers$upstream,
     downstream = headers$downstream,
     body = headers$body,
-    bin_size = headers[['bin size']],
-    ref_point = headers[['ref point']],
+    bin_size = headers[["bin size"]],
+    ref_point = headers[["ref point"]],
     verbose = headers$verbose,
-    bin_avg_type = headers[['bin avg type']],
-    missing_data_as_zero = headers[['missing data as zero']],
-    min_threshold = headers[['min threshold']],
-    max_threshold = headers[['max threshold']],
+    bin_avg_type = headers[["bin avg type"]],
+    missing_data_as_zero = headers[["missing data as zero"]],
+    min_threshold = headers[["min threshold"]],
+    max_threshold = headers[["max threshold"]],
     scale = headers$scale,
-    skip_zeros = headers[['skip zeros']],
-    nan_after_end = headers[['nan after end']],
-    proc_number = headers[['proc number']],
-    sort_regions = headers[['sort regions']],
-    sort_using = headers[['sort using']],
-    unscaled_5_prime = headers[['unscaled 5 prime']],
-    unscaled_3_prime = headers[['unscaled 3 prime']],
-    sample_labels = headers[['sample_labels']],
-    group_labels = headers[['group_labels']],
-    sample_boundaries_start = headers[['sample_boundaries']][1],
-    sample_boundaries_end = headers[['sample_boundaries']][2],
-    group_boundaries_start = headers[['group_boundaries']][1],
-    group_boundaries_end = headers[['group_boundaries']][2],
+    skip_zeros = headers[["skip zeros"]],
+    nan_after_end = headers[["nan after end"]],
+    proc_number = headers[["proc number"]],
+    sort_regions = headers[["sort regions"]],
+    sort_using = headers[["sort using"]],
+    unscaled_5_prime = headers[["unscaled 5 prime"]],
+    unscaled_3_prime = headers[["unscaled 3 prime"]],
+    sample_labels = headers[["sample_labels"]],
+    group_labels = headers[["group_labels"]],
+    sample_boundaries_start = headers[["sample_boundaries"]][1],
+    sample_boundaries_end = headers[["sample_boundaries"]][2],
+    group_boundaries_start = headers[["group_boundaries"]][1],
+    group_boundaries_end = headers[["group_boundaries"]][2],
     .before = "chr"
   )
-
-  # Return the parsed data
-  return(data)
 }
