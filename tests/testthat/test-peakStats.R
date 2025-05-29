@@ -1,5 +1,5 @@
 test_that("peakStats works", {
-  test_file <- system.file("extdata", "test_CTCF_compute_matrix.gz", package = "fragmentomics")
+  test_file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
   data <- parseComputeMatrix(test_file)
 
   # Test with default parameters

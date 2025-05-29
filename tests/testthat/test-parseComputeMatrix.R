@@ -1,5 +1,5 @@
 test_that("parseComputeMatrix from example file", {
-  test_file <- system.file("extdata", "test_CTCF_compute_matrix.gz", package = "fragmentomics")
+  test_file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
   result <- parseComputeMatrix(test_file)
 
   # Check if the result is a data frame
