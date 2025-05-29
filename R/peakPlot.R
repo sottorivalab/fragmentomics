@@ -15,6 +15,7 @@ peakPlot <- function(data, normalized = FALSE) {
         1
       )
     )
+    x_scale = scale_x_bins(data)
 
     # plot relative signal
     ggplot2::ggplot() +
@@ -40,8 +41,8 @@ peakPlot <- function(data, normalized = FALSE) {
       # FIXME make it relative to number of bins
       ggplot2::scale_x_continuous(
         "Position relative to referencePoint (bp)",
-        breaks = c(0,100,200,300,400,500,600,700,800),
-        labels = c("-4kb","-3kb","-2kb","-1kb","0","1kb","2kb","3kb","4kb")
+        breaks = x_scale$breaks,
+        labels = x_scale$labels
       ) +
       ggplot2::theme(legend.position = "none")
   } 
@@ -49,6 +50,7 @@ peakPlot <- function(data, normalized = FALSE) {
   {
     # labels
     label.pos <- -(max(data[['average']]$bin) * .1)
+    x_scale = scale_x_bins(data)
     # peak length
     peak.length <- tibble::tibble(
       x=max(data[['average']]$bin),
@@ -101,8 +103,8 @@ peakPlot <- function(data, normalized = FALSE) {
         ggplot2::aes(
           xmin = data[['stats']]$central_coverage_bin_min,
           xmax = data[['stats']]$central_coverage_bin_max,
-          ymin=min(data[['average']]$coverage),
-          ymax=max(data[['average']]$coverage)
+          ymin = min(data[['average']]$coverage),
+          ymax = max(data[['average']]$coverage)
         ),
         alpha=.25,
         color="orange",
@@ -116,8 +118,8 @@ peakPlot <- function(data, normalized = FALSE) {
         ggplot2::aes(
           xmin = data[['stats']]$average_coverage_bin_min,
           xmax = data[['stats']]$average_coverage_bin_max,
-          ymin=min(data[['average']]$coverage),
-          ymax=max(data[['average']]$coverage)
+          ymin = min(data[['average']]$coverage),
+          ymax = max(data[['average']]$coverage)
         ),
         alpha=.15,
         color="red",
@@ -148,8 +150,8 @@ peakPlot <- function(data, normalized = FALSE) {
       # FIXME make it relative to number of bins
       ggplot2::scale_x_continuous(
         "Position relative to referencePoint (bp)",
-        breaks = c(0,100,200,300,400,500,600,700,800),
-        labels = c("-4kb","-3kb","-2kb","-1kb","0","1kb","2kb","3kb","4kb")
+        breaks = x_scale$breaks,
+        labels = x_scale$labels
       ) +
       ggplot2::theme(legend.position = "none")
 
@@ -163,19 +165,31 @@ peakPlot <- function(data, normalized = FALSE) {
 #'
 scale_x_bins <- function(data) {
   bins <- table(ggplot2::cut_number(data[["average"]]$bin,8, labels = FALSE))
-  breaks <- as.numeric(c(1, cumsum(bins)))
-  # start from bin_size and get the central referencePoint
+  breaks <- as.numeric(c(0, cumsum(bins)))
+  # the central referencePoint
   central_bin <- data[["stats"]]$central_bin
-  labels <- lapply(breaks, function(b) {
-    # put 0 on central bin
-    if (b == central_bin) {
-      0
-    } else {
-      
-    }
+  labels <- lapply(breaks, function(br) {
+    (br - central_bin) * data[["stats"]]$bin_size
   })
+  labels <- lapply(labels, label_basepairs)
   list(
     breaks = breaks,
-    labels = labels
+    labels = unlist(labels)
   )
+}
+
+#' Label basepairs
+label_basepairs <- function(x) {
+  breaks <- c(0, 10^c("k" = 3, "M" = 6, "G" = 9, "T" = 12))
+  n_suffix <- cut(abs(x),
+                  breaks = c(unname(breaks), Inf),
+                  labels = c(names(breaks)),
+                  right = FALSE)
+  n_suffix[is.na(n_suffix)] <- ""
+  # Don't suffix basepairs unless >= kb
+  suffix <- ifelse(nzchar(as.character(n_suffix)),
+                   paste0("", n_suffix, "b"), "")
+  scale <- 1 / breaks[n_suffix]
+  scale[which(scale %in% c(Inf, NA))] <- 1
+  paste(x * scale, suffix, sep = "")
 }
