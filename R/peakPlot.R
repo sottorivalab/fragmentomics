@@ -3,6 +3,9 @@
 #' This function generates a ggplot plot for the given data.
 #'
 #' @param data A data frame containing the data to be plotted.
+#' @param normalized A logical value indicating whether the data is normalized.
+#' If TRUE, the plot will show relative signal;
+#' if FALSE, it will show raw signal.
 #' @return A ggplot object.
 #'
 #' @export
@@ -38,7 +41,6 @@ peakPlot <- function(data, normalized = FALSE) {
           sep=""
         )
       ) +
-      # FIXME make it relative to number of bins
       ggplot2::scale_x_continuous(
         "Position relative to referencePoint (bp)",
         breaks = x_scale$breaks,
@@ -147,7 +149,6 @@ peakPlot <- function(data, normalized = FALSE) {
           sep=""
         )
       ) +
-      # FIXME make it relative to number of bins
       ggplot2::scale_x_continuous(
         "Position relative to referencePoint (bp)",
         breaks = x_scale$breaks,
@@ -162,7 +163,8 @@ peakPlot <- function(data, normalized = FALSE) {
 
 #'
 #' Function to build the x scale based on nother of bins
-#'
+#' @param data A list containing the average data and stats.
+#' @return A list with breaks and labels for the x scale.
 scale_x_bins <- function(data) {
   bins <- table(ggplot2::cut_number(data[["average"]]$bin,8, labels = FALSE))
   breaks <- as.numeric(c(0, cumsum(bins)))
@@ -178,7 +180,11 @@ scale_x_bins <- function(data) {
   )
 }
 
+#'
 #' Label basepairs
+#' @param x A numeric vector representing basepairs.
+#' @return A character vector with basepairs labeled with appropriate suffixes.
+#' 
 label_basepairs <- function(x) {
   breaks <- c(0, 10^c("k" = 3, "M" = 6, "G" = 9, "T" = 12))
   n_suffix <- cut(abs(x),

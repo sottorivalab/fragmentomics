@@ -18,5 +18,6 @@ A tibble containing the parsed data.
 }
 }
 \description{
-This function parse output from deeptools \href{https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html}{computeMatrix}
+This function parse output from deeptools computeMatrix
+https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html
 }

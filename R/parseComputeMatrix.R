@@ -1,6 +1,7 @@
 #' Parse Compute Matrix
 #'
-#' This function parse output from deeptools [computeMatrix](https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html)
+#' This function parse output from deeptools computeMatrix
+#' https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html
 #'
 #' @param file Path to the computeMatrix output file.
 #' @returns A tibble containing the parsed data.

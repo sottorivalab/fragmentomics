@@ -8,6 +8,10 @@ peakPlot(data, normalized = FALSE)
 }
 \arguments{
 \item{data}{A data frame containing the data to be plotted.}
+
+\item{normalized}{A logical value indicating whether the data is normalized.
+If TRUE, the plot will show relative signal;
+if FALSE, it will show raw signal.}
 }
 \value{
 A ggplot object.
