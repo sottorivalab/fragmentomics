@@ -6,13 +6,10 @@
 #' @return A ggplot object.
 #'
 #' @export
-peakPlot <- function(data, normalized=FALSE) 
-{
-  if (normalized) 
-  {
-    
-    peak.relative.length <- tibble::tibble(
-      x=max(data[['average']]$bin),
+peakPlot <- function(data, normalized = FALSE) {
+  if (normalized) {
+    peak_relative_length <- tibble::tibble(
+      x = max(data[['average']]$bin),
       y=c(
         data[['stats']]$reference_point_relative,
         1
@@ -25,8 +22,8 @@ peakPlot <- function(data, normalized=FALSE)
       ggplot2::geom_line(data=data[['average']],ggplot2::aes(y=relative, x=bin)) +
       ggplot2::geom_hline(yintercept = 1, color="#6082B6", linetype = 'dotted') +
       # length
-      ggplot2::geom_point(data=peak.relative.length, ggplot2::aes(x=x, y=y), color="green", size=1) +
-      ggplot2::geom_line(data=peak.relative.length, ggplot2::aes(x=x, y=y), color="green", linetype="dashed") +
+      ggplot2::geom_point(data=peak_relative_length, ggplot2::aes(x=x, y=y), color="green", size=1) +
+      ggplot2::geom_line(data=peak_relative_length, ggplot2::aes(x=x, y=y), color="green", linetype="dashed") +
       # labels
       ggplot2::xlab(data[['stats']]$target_label) +
       ggplot2::ylab(data[['stats']]$signal_label) +
@@ -161,4 +158,24 @@ peakPlot <- function(data, normalized=FALSE)
   }
 }
 
-
+#'
+#' Function to build the x scale based on nother of bins
+#'
+scale_x_bins <- function(data) {
+  bins <- table(ggplot2::cut_number(data[["average"]]$bin,8, labels = FALSE))
+  breaks <- as.numeric(c(1, cumsum(bins)))
+  # start from bin_size and get the central referencePoint
+  central_bin <- data[["stats"]]$central_bin
+  labels <- lapply(breaks, function(b) {
+    # put 0 on central bin
+    if (b == central_bin) {
+      0
+    } else {
+      
+    }
+  })
+  list(
+    breaks = breaks,
+    labels = labels
+  )
+}
