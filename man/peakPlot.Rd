@@ -4,7 +4,7 @@
 \alias{peakPlot}
 \title{Peak Plot}
 \usage{
-peakPlot(data)
+peakPlot(data, normalized = FALSE)
 }
 \arguments{
 \item{data}{A data frame containing the data to be plotted.}

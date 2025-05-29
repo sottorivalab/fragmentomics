@@ -9,6 +9,7 @@ utils::globalVariables(
     "strand",
     "x",
     "y",
-    "closest"
+    "closest",
+    "relative"
   )
 )
