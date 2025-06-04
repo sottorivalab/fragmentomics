@@ -26,8 +26,10 @@ peak_stats <- function(
     signal_label = NULL,
     target_label = NULL,
     source_label = NULL,
-    left = 50, right = 50,
-    central = 30, average = 1000,
+    left = 50,
+    right = 50,
+    central = 30,
+    average = 1000,
     rpoints = 10000) {
   # if not signal label use sample_labels
   if (is.null(signal_label)) {
