@@ -6,7 +6,19 @@ test_that("parseComputeMatrix from example file", {
   # Check if the expected columns are present
   expect_true(
     all(
-      c("chr", "start", "end", "name", "score", "strand") %in% colnames(result)
+      c(
+        "chr",
+        "start",
+        "end",
+        "name",
+        "score",
+        "strand",
+        "file",
+        "upstream",
+        "downstream",
+        "body",
+        "bin_size",
+        "ref_point") %in% colnames(result)
     )
   )
   # Check if the bin columns are renamed correctly
@@ -18,4 +30,11 @@ test_that("parseComputeMatrix from example file", {
   # Check if the data frame has the expected number of rows
   expect_equal(nrow(result), 1000)
   expect_equal(ncol(result), 23 + 6 + 800)
+})
+
+test_that("parseComputeMatrix with non existent file", {
+  expect_error(
+    parse_compute_matrix("non_existent_file.txt"),
+    "File does not exist: non_existent_file.txt"
+  )
 })
