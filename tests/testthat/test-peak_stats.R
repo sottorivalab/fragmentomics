@@ -17,5 +17,20 @@ test_that("peakStats works", {
       ) %in% colnames(result[["average"]])
     )
   )
-
+  expect_true(
+    all(
+      c(
+        "target_label",
+        "signal_label",
+        "source_label",
+        "bin_size",
+        "central_bin",
+        "peak_length",
+        "reference_point_coverage",
+        "central_coverage",
+        "average_coverage",
+        "background_mean"
+      ) %in% names(result[["stats"]])
+    )
+  )
 })

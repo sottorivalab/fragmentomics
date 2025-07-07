@@ -22,7 +22,8 @@ Imports:
   ggplot2,
   readr,
   jsonlite,
-  tidyr
+  tidyr,
+  fs
 Suggests: 
     knitr,
     rmarkdown,

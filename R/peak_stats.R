@@ -38,9 +38,9 @@ peak_stats <- function(
     )
   }
 
-  # if not target_labels use file
+  # if not target_labels use file removing path and extension
   if (is.null(target_label)) {
-    target_label <- as.character(data |> dplyr::select(file) |> unique())
+    target_label <- fs::path_file(fs::path_ext_remove(as.character(data |> dplyr::select(file) |> unique())))
   }
 
   # if not source_label use NA

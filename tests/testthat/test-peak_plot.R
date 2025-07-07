@@ -6,4 +6,9 @@ test_that("peakPlot works", {
   plot <- peak_plot(stats)
   # Check if the plot is a ggplot object
   expect_true(ggplot2::is.ggplot(plot))
+  # Check if the plot has the expected title
+  expect_equal(
+   plot$labels$title,
+    "Composite coverage: CTCF on TEST_SAMPLE"
+  )
 })

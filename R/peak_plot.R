@@ -157,7 +157,7 @@ peak_plot <- function(data, normalized = FALSE) {
       ) +
       # average coverage
       ggplot2::geom_hline(
-        yintercept = data[["stats"]]$average_coverage, 
+        yintercept = data[["stats"]]$average_coverage,
         color = "red", linetype = "dotted"
       ) +
       ggplot2::geom_text(
@@ -199,7 +199,7 @@ peak_plot <- function(data, normalized = FALSE) {
       ggplot2::ylab(data[["stats"]]$signal_label) +
       ggplot2::ggtitle(
         paste(
-          "Composite coverage: ",
+          "Composite coverage:",
           data[["stats"]]$target_label,
           "on",
           data[["stats"]]$signal_label,
@@ -254,7 +254,7 @@ scale_x_bins <- function(data) {
 #' Label basepairs
 #' @param x A numeric vector representing basepairs.
 #' @return A character vector with basepairs labeled with appropriate suffixes.
-#' 
+#'
 label_basepairs <- function(x) {
   breaks <- c(0, 10^c("k" = 3, "M" = 6, "G" = 9, "T" = 12))
   n_suffix <- cut(abs(x),
