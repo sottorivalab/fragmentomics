@@ -26,5 +26,9 @@ Verify devtools with:
 devtools::has_devel()
 ```
 
+## Publishing
 
+```
+hugo
+```
 
