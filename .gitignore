@@ -42,6 +42,8 @@ vignettes/*.pdf
 
 # draw.io
 .$*
+
+# vignette
 inst/doc
 /doc/
 /Meta/
