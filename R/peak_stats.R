@@ -40,7 +40,11 @@ peak_stats <- function(
 
   # if not target_labels use file removing path and extension
   if (is.null(target_label)) {
-    target_label <- fs::path_file(fs::path_ext_remove(as.character(data |> dplyr::select(file) |> unique())))
+    target_label <- fs::path_file(
+      fs::path_ext_remove(
+        as.character(data |> dplyr::select(file) |> unique())
+      )
+    )
   }
 
   # if not source_label use NA
@@ -68,7 +72,7 @@ peak_stats <- function(
 
   # add relative signal
   average_data <- average_data |>
-    dplyr::mutate(relative = coverage/mean(coverage)) |>
+    dplyr::mutate(relative = coverage / mean(coverage)) |>
     dplyr::mutate(mean = mean(coverage))
 
   # central point

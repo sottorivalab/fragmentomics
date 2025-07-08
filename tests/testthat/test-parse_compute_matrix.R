@@ -54,4 +54,3 @@ test_that("parseComputeMatrix with insufficient columns", {
     "The file does not contain enough columns!"
   )
 })
-

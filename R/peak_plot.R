@@ -6,11 +6,12 @@
 #' @param normalized A logical value indicating whether the data is normalized.
 #' If TRUE, the plot will show relative signal;
 #' if FALSE, it will show raw signal.
-#' @param palette A character string representing the color palette to be used for the plot.
+#' @param palette A character string representing the
+#' color palette to be used for the plot.
 #' @return A ggplot object.
 #'
 #' @export
-peak_plot <- function(data, normalized = FALSE, palette = 'Set1') {
+peak_plot <- function(data, normalized = FALSE, palette = "Set1") {
   # set colors
   palette <- RColorBrewer::brewer.pal(7, palette)
 
@@ -27,15 +28,32 @@ peak_plot <- function(data, normalized = FALSE, palette = 'Set1') {
 #' This function generates a ggplot plot for normalized data.
 #'
 #' @param data A list containing the average data and stats.
-#' @param palette A character vector representing the color palette to be used for the plot.A character vector representing the color palette to be used for the plot.
+#' @param palette A character vector representing the color
+#' palette to be used for the plot.A character vector
+#' representing the color palette to be used for the plot.
 #' @return A ggplot object for normalized data.
 normalized_plot <- function(data, palette) {
 
-  # x scale
-  x_scale = scale_x_bins(data)
+  # title
+  title_label <- paste(
+    "Composite coverage: ",
+    data[["stats"]]$target_label,
+    "on",
+    data[["stats"]]$signal_label,
+    sep = " "
+  )
 
-  # peak length
-  plength <- peak_length(data, normalized = TRUE)
+  # subtitle
+  subtitle_label <- paste(
+    "reference_point_relative=",
+    round(data[["stats"]]$reference_point_relative, digits = 4),
+    " - peak_relative_length=",
+    round(data[["stats"]]$peak_relative, digits = 4),
+    sep = ""
+  )
+
+  # x scale
+  x_scale <- scale_x_bins(data)
 
   # plot relative signal
   g <- ggplot2::ggplot() +
@@ -43,8 +61,8 @@ normalized_plot <- function(data, palette) {
     ggplot2::geom_line(
       data = data[["average"]],
       ggplot2::aes(
-        y=relative,
-        x=bin
+        y = relative,
+        x = bin
       ),
       color = palette[1]
     ) +
@@ -76,33 +94,20 @@ normalized_plot <- function(data, palette) {
     # labels
     ggplot2::xlab(data[["stats"]]$target_label) +
     ggplot2::ylab(data[["stats"]]$signal_label) +
-    # title
-    ggplot2::ggtitle(
-      paste(
-        "Composite coverage: ",
-        data[["stats"]]$target_label,
-        "on", data[["stats"]]$signal_label, sep = " "),
-      subtitle = paste(
-        "reference_point_relative=",
-        round(data[["stats"]]$reference_point_relative, digits = 4),
-        " - peak_relative_length=",
-        round(data[["stats"]]$peak_relative, digits = 4),
-        sep = ""
-      )
-    ) +
+    ggplot2::ggtitle(title_label, subtitle = subtitle_label) +
     ggplot2::scale_x_continuous(
       "Position relative to referencePoint (bp)",
       breaks = x_scale$breaks,
       labels = x_scale$labels
     ) +
     custom_legend(
-      labels = c('Background coverage','Composite coverage'),
-      fill = c(palette[2],palette[1]),
+      labels = c("Background coverage", "Composite coverage"),
+      fill = c(palette[2], palette[1]),
       colour = NA,
       key = ggplot2::draw_key_polygon
     ) +
     ggplot2::theme(legend.position = "right")
-  return(g)
+  g
 }
 
 #' Raw plot
@@ -110,7 +115,8 @@ normalized_plot <- function(data, palette) {
 #' This function generates a ggplot plot for raw data.
 #'
 #' @param data A list containing the average data, integration data, and stats.
-#' @param palette A character string representing the color palette to be used for the plot.
+#' @param palette A character string representing the color palette
+#' to be used for the plot.
 #' @return A ggplot object for raw data.
 raw_plot <- function(data, palette) {
 
@@ -120,8 +126,6 @@ raw_plot <- function(data, palette) {
   # x scale
   x_scale <- scale_x_bins(data)
 
-  # peak length
-  plength <- peak_length(data, normalized = FALSE)
 
   # calculate space for geom_rect on top as max + 10%
   data_range <- range(data[["average"]]$coverage)
@@ -130,7 +134,7 @@ raw_plot <- function(data, palette) {
   top_rect_max <- top_rect_min + data_inc
 
   # plot raw signal
-  g1 <- ggplot2::ggplot() +
+  g <- ggplot2::ggplot() +
     # composite coverage
     ggplot2::geom_line(
       data = data[["average"]],
@@ -212,7 +216,8 @@ raw_plot <- function(data, palette) {
       ggplot2::aes(
         label_pos,
         data[["stats"]]$average_coverage,
-        label = "average"),
+        label = "average"
+      ),
       size = 2,
       vjust = -0.5,
       color = palette[7]
@@ -261,8 +266,14 @@ raw_plot <- function(data, palette) {
     # custom legend
     custom_legend(
       title = "Metrics",
-      labels = c('Average coverage', 'Background coverage','Central coverage','Composite coverage','Reference coverage'),
-      fill = c(palette[6],palette[2],palette[5],palette[1],palette[4]),
+      labels = c(
+        "Average coverage",
+        "Background coverage",
+        "Central coverage",
+        "Composite coverage",
+        "Reference coverage"
+      ),
+      fill = c(palette[6], palette[2], palette[5], palette[1], palette[4]),
       colour = NA,
       key = ggplot2::draw_key_polygon
     ) +
@@ -292,36 +303,11 @@ raw_plot <- function(data, palette) {
       "Position relative to referencePoint (bp)",
       breaks = x_scale$breaks,
       labels = x_scale$labels
-    )
+    ) +
     ggplot2::theme(legend.position = "right")
 
-  # return plot
-  return(g1)
+  g
 }
-
-
-#'
-#' peak_length
-#'
-#' Function to calculate the peak length based on the data.
-#' @param data A data frame containing the average data and stats.
-#' @param normalized A logical value indicating whether the data is normalized.
-#' @return A tibble representing the peak length.
-peak_length <- function(data, normalized = FALSE) {
-
-  if (normalized) {
-    return(tibble::tibble(
-      x = max(data[["average"]]$bin),
-      y = c(data[["stats"]]$reference_point_relative, 1)
-    ))
-  } else {
-    return(tibble::tibble(
-      x = max(data[["average"]]$bin),
-      y = c(data[["stats"]]$reference_point_coverage, data[["stats"]]$background_mean)
-    ))
-  }
-}
-
 
 #'
 #' scale_x_bins
@@ -330,7 +316,7 @@ peak_length <- function(data, normalized = FALSE) {
 #' @param data A list containing the average data and stats.
 #' @return A list with breaks and labels for the x scale.
 scale_x_bins <- function(data) {
-  bins <- table(ggplot2::cut_number(data[["average"]]$bin,8, labels = FALSE))
+  bins <- table(ggplot2::cut_number(data[["average"]]$bin, 8, labels = FALSE))
   breaks <- as.numeric(c(0, cumsum(bins)))
   # the central referencePoint
   central_bin <- data[["stats"]]$central_bin
@@ -373,8 +359,10 @@ label_basepairs <- function(x) {
 #' @param labels A character vector of labels for the legend.
 #' @param ... A variable number of aesthetic mappings to be used in the legend.
 #' @param title A character string for the title of the legend.
-#' @param key A function to draw the key glyph in the legend (default is `draw_key_point`).
-#' @param guide_args A list of additional arguments to be passed to the `guide_legend` function.
+#' @param key A function to draw the key glyph
+#' in the legend (default is `draw_key_point`).
+#' @param guide_args A list of additional arguments
+#' to be passed to the `guide_legend` function.
 #' @return A list containing a dummy geom and a dummy scale for the legend.
 custom_legend <- function(labels = NULL,
                           ...,

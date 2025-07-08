@@ -1,5 +1,9 @@
 test_that("parse_samplesheet works", {
-  test_file <- system.file("extdata", "samplesheet.csv", package = "fragmentomics")
+  test_file <- system.file(
+    "extdata",
+    "samplesheet.csv",
+    package = "fragmentomics"
+  )
   # Parse the samplesheet
   samplesheet <- parse_samplesheet(test_file)
   # Check if the result is a data frame
