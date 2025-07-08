@@ -10,6 +10,13 @@
 #' color palette to be used for the plot.
 #' @return A ggplot object.
 #'
+#' @examples
+#' file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+#' matrix_data <- parse_compute_matrix(file)
+#' peak_data <- peak_stats(matrix_data)
+#' peak_plot(peak_data)
+#' peak_plot(peak_data, normalized=TRUE)
+#'
 #' @export
 peak_plot <- function(data, normalized = FALSE, palette = "Set1") {
   # set colors

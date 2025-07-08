@@ -5,6 +5,11 @@
 #' used in an experiment.
 #'
 #' @param file A character string specifying the path to the samplesheet file.
+#' @returns A tibble containing the parsed samplesheet data.
+#'
+#' @examples
+#' example_samplesheet <- system.file("extdata", "samplesheet.csv", package = "fragmentomics")
+#' parse_samplesheet(example_samplesheet)
 #'
 #' @export
 parse_samplesheet <- function(file) {

@@ -9,6 +9,9 @@
 #'  2. columns 24-29 are chr, start, end, name, score, strand
 #'  3. columns 30+ are bins with values
 #'
+#' @examples
+#' file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+#' matrix_data <- parse_compute_matrix(file)
 #' @export
 parse_compute_matrix <- function(file) {
 

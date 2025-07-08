@@ -9,8 +9,16 @@ parse_samplesheet(file)
 \arguments{
 \item{file}{A character string specifying the path to the samplesheet file.}
 }
+\value{
+A tibble containing the parsed samplesheet data.
+}
 \description{
 This function is intended to parse a samplesheet file,
 which typically contains metadata about samples
 used in an experiment.
+}
+\examples{
+example_samplesheet <- system.file("extdata", "samplesheet.csv", package = "fragmentomics")
+parse_samplesheet(example_samplesheet)
+
 }

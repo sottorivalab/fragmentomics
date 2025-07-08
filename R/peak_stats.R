@@ -19,6 +19,11 @@
 #' @return A list containing the peak statistics,
 #' integration data, and average data
 #'
+#' @examples
+#' file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+#' matrix_data <- parse_compute_matrix(file)
+#' peak_data <- peak_stats(matrix_data)
+#'
 #' @export
 
 peak_stats <- function(
