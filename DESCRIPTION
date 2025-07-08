@@ -1,7 +1,7 @@
 Package: fragmentomics
 Type: Package
 Title: Analyze data from pipeline nf-fragmentomics
-Version: 0.1.0
+Version: 1.0
 Authors@R: c(
     person(
       "Davide", "Rambladi",
