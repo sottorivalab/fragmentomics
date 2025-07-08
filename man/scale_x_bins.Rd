@@ -2,7 +2,7 @@
 % Please edit documentation in R/peak_plot.R
 \name{scale_x_bins}
 \alias{scale_x_bins}
-\title{Function to build the x scale based on nother of bins}
+\title{scale_x_bins}
 \usage{
 scale_x_bins(data)
 }

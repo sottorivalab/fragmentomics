@@ -23,7 +23,9 @@ Imports:
   readr,
   jsonlite,
   tidyr,
-  fs
+  fs,
+  RColorBrewer,
+  scales
 Suggests: 
     knitr,
     rmarkdown,

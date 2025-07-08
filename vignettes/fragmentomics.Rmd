@@ -26,15 +26,30 @@ library(fragmentomics)
 
 Simple example using data provided in the package. 
 
-```{r example}
+```{r example_file}
 example_file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+```
+
+Parse compute matrix
+
+```{r parse_compute_matrix}
 matrix_data <- parse_compute_matrix(example_file)
+```
+
+Generate stats
+
+```{r peak_stats}
 peak_data <- peak_stats(matrix_data)
 ```
 
-Plot:
+Plot raw signal:
 
-```{r, fig.width=10, fig.height=10}
+```{r peak_plot, fig.width=10, fig.height=10}
 peak_plot(peak_data)
 ```
 
+Plot relative signal:
+
+```{r peak_plot_relative, fig.width=10, fig.height=10}
+peak_plot(peak_data, normalized = TRUE)
+```

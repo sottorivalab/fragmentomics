@@ -10,6 +10,7 @@ utils::globalVariables(
     "x",
     "y",
     "closest",
-    "relative"
+    "relative",
+    "dummy"
   )
 )
