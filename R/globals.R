@@ -11,6 +11,7 @@ utils::globalVariables(
     "y",
     "closest",
     "relative",
-    "dummy"
+    "dummy",
+    "timepoint"
   )
 )

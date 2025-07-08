@@ -4,10 +4,13 @@
 \alias{parse_samplesheet}
 \title{Parse a samplesheet file}
 \usage{
-parse_samplesheet(file)
+parse_samplesheet(file, timepoint_levels = c("BL", "BR", "PD"))
 }
 \arguments{
 \item{file}{A character string specifying the path to the samplesheet file.}
+
+\item{timepoint_levels}{A character vector specifying the levels for the
+timepoint factor.}
 }
 \value{
 A tibble containing the parsed samplesheet data.
@@ -18,7 +21,11 @@ which typically contains metadata about samples
 used in an experiment.
 }
 \examples{
-example_samplesheet <- system.file("extdata", "samplesheet.csv", package = "fragmentomics")
+example_samplesheet <- system.file(
+  "extdata",
+  "samplesheet.csv",
+  package = "fragmentomics"
+)
 parse_samplesheet(example_samplesheet)
 
 }
