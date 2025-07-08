@@ -25,7 +25,8 @@ Imports:
   tidyr,
   fs,
   RColorBrewer,
-  scales
+  scales,
+  readr
 Suggests: 
     knitr,
     rmarkdown,
