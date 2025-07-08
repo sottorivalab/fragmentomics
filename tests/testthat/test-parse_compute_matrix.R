@@ -38,3 +38,20 @@ test_that("parseComputeMatrix with non existent file", {
     "File does not exist: non_existent_file.txt"
   )
 })
+
+test_that("parseComputeMatrix with empty file", {
+  empty_file <- system.file("extdata", "empty.gz", package = "fragmentomics")
+  expect_error(
+    parse_compute_matrix(empty_file),
+    "no lines available in input"
+  )
+})
+
+test_that("parseComputeMatrix with insufficient columns", {
+  empty_file <- system.file("extdata", "nocols.gz", package = "fragmentomics")
+  expect_error(
+    parse_compute_matrix(empty_file),
+    "The file does not contain enough columns!"
+  )
+})
+

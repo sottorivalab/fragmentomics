@@ -47,4 +47,8 @@ Verify devtools with:
 devtools::has_devel()
 ```
 
-## 
+Report coverage with:
+
+```         
+devtools:::test_coverage()
+```

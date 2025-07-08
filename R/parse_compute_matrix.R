@@ -20,11 +20,6 @@ parse_compute_matrix <- function(file) {
   # Read the file, skip first line (is json data)
   data <- tibble::as_tibble(utils::read.delim(file, header = FALSE, skip = 1))
 
-  # Check if the data is empty
-  if (nrow(data) == 0) {
-    stop("The file is empty or does not contain valid data.")
-  }
-
   # get headers
   headers <- jsonlite::fromJSON(
     stringr::str_remove(readr::read_lines(file, n_max = 1), "@")
