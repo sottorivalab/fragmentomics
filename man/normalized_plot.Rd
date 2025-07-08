@@ -9,7 +9,9 @@ normalized_plot(data, palette)
 \arguments{
 \item{data}{A list containing the average data and stats.}
 
-\item{palette}{A character vector representing the color palette to be used for the plot.A character vector representing the color palette to be used for the plot.}
+\item{palette}{A character vector representing the color
+palette to be used for the plot.A character vector
+representing the color palette to be used for the plot.}
 }
 \value{
 A ggplot object for normalized data.

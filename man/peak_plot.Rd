@@ -13,7 +13,8 @@ peak_plot(data, normalized = FALSE, palette = "Set1")
 If TRUE, the plot will show relative signal;
 if FALSE, it will show raw signal.}
 
-\item{palette}{A character string representing the color palette to be used for the plot.}
+\item{palette}{A character string representing the
+color palette to be used for the plot.}
 }
 \value{
 A ggplot object.

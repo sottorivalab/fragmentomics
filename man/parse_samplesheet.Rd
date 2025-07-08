@@ -10,5 +10,7 @@ parse_samplesheet(file)
 \item{file}{A character string specifying the path to the samplesheet file.}
 }
 \description{
-This function is intended to parse a samplesheet file, which typically contains metadata about samples used in an experiment.
+This function is intended to parse a samplesheet file,
+which typically contains metadata about samples
+used in an experiment.
 }

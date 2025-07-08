@@ -9,7 +9,8 @@ raw_plot(data, palette)
 \arguments{
 \item{data}{A list containing the average data, integration data, and stats.}
 
-\item{palette}{A character string representing the color palette to be used for the plot.}
+\item{palette}{A character string representing the color palette
+to be used for the plot.}
 }
 \value{
 A ggplot object for raw data.

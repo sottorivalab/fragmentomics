@@ -21,9 +21,11 @@ custom_legend(
 
 \item{title}{A character string for the title of the legend.}
 
-\item{key}{A function to draw the key glyph in the legend (default is \code{draw_key_point}).}
+\item{key}{A function to draw the key glyph
+in the legend (default is \code{draw_key_point}).}
 
-\item{guide_args}{A list of additional arguments to be passed to the \code{guide_legend} function.}
+\item{guide_args}{A list of additional arguments
+to be passed to the \code{guide_legend} function.}
 }
 \value{
 A list containing a dummy geom and a dummy scale for the legend.
