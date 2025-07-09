@@ -53,3 +53,6 @@ inst/doc
 
 # vim
 *.swp
+
+# results leftovers
+results/

@@ -9,6 +9,9 @@ parse_samplesheet(file, root_path, timepoint_levels = c("BL", "BR", "PD"))
 \arguments{
 \item{file}{A character string specifying the path to the samplesheet file.}
 
+\item{root_path}{A character string specifying the root
+path for the samplesheet.}
+
 \item{timepoint_levels}{A character vector specifying the levels for the
 timepoint factor.}
 }
