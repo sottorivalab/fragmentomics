@@ -20,11 +20,27 @@
 #'
 #' @export
 parse_samplesheet <- function(file, timepoint_levels = c("BL", "BR", "PD")) {
+
+  # Check if the file exists
+  if (!file.exists(file)) {
+    stop("File does not exist: ", file)
+  }
+
   t <- readr::read_csv(file, show_col_types = FALSE)
+
+  # check timepoints in samplesheet
+  if (!all(t$timepoint %in% timepoint_levels)) {
+    stop(
+      "Not all timepoints in samplesheet are in the expected levels: ",
+      paste(timepoint_levels, collapse = ", ")
+    )
+  }
+
   t |>
     dplyr::mutate(timepoint = factor(timepoint, levels = timepoint_levels)) |>
     dplyr::mutate(
       encoded_timepoint = as.integer(timepoint),
       .after = "timepoint"
-    )
+    ) |>
+    dplyr::select(caseid, sampleid, timepoint, encoded_timepoint)
 }
