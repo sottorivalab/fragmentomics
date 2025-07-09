@@ -15,9 +15,7 @@ test_that("parse_samplesheet works", {
         "caseid",
         "sampleid",
         "timepoint",
-        "bam",
-        "bai",
-        "bw"
+        "encoded_timepoint"
       ) %in% colnames(samplesheet)
     )
   )
@@ -41,3 +39,4 @@ test_that("parse_samplesheet error with non existent timepoints", {
     "Not all timepoints in samplesheet are in the expected levels: XR, XX"
   )
 })
+

@@ -19,7 +19,11 @@
 #' parse_samplesheet(example_samplesheet)
 #'
 #' @export
-parse_samplesheet <- function(file, timepoint_levels = c("BL", "BR", "PD")) {
+parse_samplesheet <- function(
+  file,
+  root_path,
+  timepoint_levels = c("BL", "BR", "PD")
+) {
 
   # Check if the file exists
   if (!file.exists(file)) {

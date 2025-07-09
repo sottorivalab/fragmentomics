@@ -12,6 +12,9 @@ utils::globalVariables(
     "closest",
     "relative",
     "dummy",
-    "timepoint"
+    "timepoint",
+    "caseid",
+    "sampleid",
+    "encoded_timepoint"
   )
 )

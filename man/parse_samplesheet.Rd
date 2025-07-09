@@ -4,7 +4,7 @@
 \alias{parse_samplesheet}
 \title{Parse a samplesheet file}
 \usage{
-parse_samplesheet(file, timepoint_levels = c("BL", "BR", "PD"))
+parse_samplesheet(file, root_path, timepoint_levels = c("BL", "BR", "PD"))
 }
 \arguments{
 \item{file}{A character string specifying the path to the samplesheet file.}
