@@ -5,8 +5,6 @@
 #' used in an experiment.
 #'
 #' @param file A character string specifying the path to the samplesheet file.
-#' @param root_path A character string specifying the root
-#' path for the samplesheet.
 #' @param timepoint_levels A character vector specifying the levels for the
 #' timepoint factor.
 #'
@@ -18,12 +16,11 @@
 #'   "samplesheet.csv",
 #'   package = "fragmentomics"
 #' )
-#' parse_samplesheet(example_samplesheet, getwd())
+#' parse_samplesheet(example_samplesheet)
 #'
 #' @export
 parse_samplesheet <- function(
   file,
-  root_path,
   timepoint_levels = c("BL", "BR", "PD")
 ) {
 
@@ -50,14 +47,6 @@ parse_samplesheet <- function(
       .after = "timepoint"
     ) |>
     dplyr::select(caseid, sampleid, timepoint, encoded_timepoint)
-
-  # add root path column for results
-  datapaths <- unlist(samples |> purrr::pmap(function(caseid, sampleid, timepoint, encoded_timepoint){
-    file.path(root_path, caseid, sampleid, "fragmentomics/processed/matrix")
-  }))
-
-  samples <- samples |>
-    dplyr::mutate(datapath=datapaths)
 
   samples
 }
