@@ -18,7 +18,7 @@
 #'   "samplesheet.csv",
 #'   package = "fragmentomics"
 #' )
-#' parse_samplesheet(example_samplesheet)
+#' parse_samplesheet(example_samplesheet, getwd())
 #'
 #' @export
 parse_samplesheet <- function(

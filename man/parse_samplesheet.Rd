@@ -29,6 +29,6 @@ example_samplesheet <- system.file(
   "samplesheet.csv",
   package = "fragmentomics"
 )
-parse_samplesheet(example_samplesheet)
+parse_samplesheet(example_samplesheet, getwd())
 
 }
