@@ -27,10 +27,10 @@ load_sample_data <- function(samplesheet, rootpath, subdir = "fragmentomics/proc
       )
       all <- lapply(matrix_files, function(mf){
         m <- parse_compute_matrix(mf)
-        s <- peak_stats(m)
+        s <- peak_stats(m, signal_label = sampleid, source_label = basename(sourcedir))
         list(
           matrix = m,
-          stats = s
+          peakstats = s
         )
       })
       mnames <- tools::file_path_sans_ext(base::basename(matrix_files))
@@ -40,6 +40,56 @@ load_sample_data <- function(samplesheet, rootpath, subdir = "fragmentomics/proc
     names(s) <- basename(sources)
     s
   })
+
   names(samples) <- samplesheet$sampleid
-  samples
+
+  # summarise cohort
+  cohort <- dplyr::bind_rows(lapply(samples, function(sample) {
+    dplyr::bind_rows(lapply(sample, function(source) {
+      dplyr::bind_rows(lapply(source, function(target) {
+        target$peakstats$stats
+      }))
+    }))
+  }))
+
+  # cohort
+  cohort <- dplyr::left_join(cohort, samplesheet, by=dplyr::join_by("signal_label" == "sampleid")) |>
+    dplyr::mutate(
+      sampleid = signal_label
+    ) |>
+    dplyr::relocate(dplyr::any_of(names(samplesheet)), .before = 1)
+
+  # group by sources and targets
+  source_names <- unique(unlist(lapply(samples, function(sample){
+    names(sample)
+  })))
+
+  targets <- lapply(source_names, function(source_name) {
+    dplyr::bind_rows(
+      lapply(names(samples), function(sample_name){
+        sample <- samples[[sample_name]]
+        dplyr::bind_rows(
+          lapply(sample[[source_name]], function(target){
+            target$peakstats$average |>
+              dplyr::mutate(
+                sampleid = sample_name,
+                .before = 1
+              ) |>
+              dplyr::mutate(
+                targetid = unique(target$peakstats$stats$target_label),
+                .before = 1
+              )
+          })
+        )
+      })
+    )
+  })
+  names(targets) <- source_names
+
+
+  list(
+    samples = samples,
+    cohort = cohort,
+    targets = targets
+  )
 }

@@ -9,8 +9,8 @@ test_that("test load_sample_data from example dir structure", {
   )
   samplesheet <- parse_samplesheet(example_samplesheet)
   results <- load_sample_data(samplesheet, fragdir)
-  expect_true(is.list(results))
-  s1 <- results[[1]]
+  expect_true(is.list(results$samples))
+  s1 <- results$samples[[1]]
   expect_true(is.list(s1))
   source1 <- s1[[1]]
   expect_true(is.list(source1))

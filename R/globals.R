@@ -16,6 +16,7 @@ utils::globalVariables(
     "caseid",
     "sampleid",
     "encoded_timepoint",
-    "target"
+    "target",
+    "signal_label"
   )
 )
