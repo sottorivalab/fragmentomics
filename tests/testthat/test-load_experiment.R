@@ -1,4 +1,4 @@
-test_that("test load_sample_data from example dir structure", {
+test_that("test load_experiment from example dir structure", {
   tmpdir <- withr::local_tempdir()
   fragdir <- build_dir_structure(root = tmpdir)
 
@@ -8,7 +8,7 @@ test_that("test load_sample_data from example dir structure", {
     package = "fragmentomics"
   )
   samplesheet <- parse_samplesheet(example_samplesheet)
-  results <- load_sample_data(samplesheet, fragdir)
+  results <- load_experiment(samplesheet, fragdir)
   expect_true(is.list(results$samples))
   s1 <- results$samples[[1]]
   expect_true(is.list(s1))

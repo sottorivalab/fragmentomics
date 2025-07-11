@@ -13,7 +13,7 @@
 #' to "fragmentomics/processed/matrix".
 #' @returns A list containing the loaded sample data.
 #' @export
-load_sample_data <- function(samplesheet,
+load_experiment <- function(samplesheet,
                              rootpath,
                              subdir = "fragmentomics/processed/matrix") {
   samples <- samplesheet |> purrr::pmap(
