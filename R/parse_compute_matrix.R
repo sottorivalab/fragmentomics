@@ -55,8 +55,11 @@ parse_compute_matrix <- function(file) {
   # Remove NaN
   data <- data |> dplyr::mutate_all(function(x) ifelse(is.nan(x), NA, x))
 
+  target_name <- tools::file_path_sans_ext(base::basename(file))
+
   # add headers info
   data <- data |> dplyr::mutate(
+    target = target_name,
     file = file,
     upstream = headers$upstream,
     downstream = headers$downstream,
