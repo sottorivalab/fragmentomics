@@ -58,7 +58,7 @@ peak_stats <- function(
   }
 
   # average data
-  bins <- data |> dplyr::select(!(file:strand))
+  bins <- data |> dplyr::select(!(target:strand))
   average_data <- bins |>
     dplyr::summarise(
       dplyr::across(dplyr::everything(), \(x) mean(x, na.rm = TRUE))
