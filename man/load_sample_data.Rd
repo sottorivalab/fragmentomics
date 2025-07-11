@@ -3,7 +3,8 @@
 \name{load_sample_data}
 \alias{load_sample_data}
 \title{Load sample data from a samplesheet
-This function is intended to load sample data based on a provided samplesheet.}
+This function is intended to load sample data
+based on a provided samplesheet.}
 \usage{
 load_sample_data(
   samplesheet,
@@ -12,17 +13,22 @@ load_sample_data(
 )
 }
 \arguments{
-\item{samplesheet}{A character string specifying the path to the samplesheet file.}
+\item{samplesheet}{A character string specifying
+the path to the samplesheet file.}
 
-\item{rootpath}{A character string specifying the root path where the sample data is located.}
+\item{rootpath}{A character string specifying the
+root path where the sample data is located.}
 
-\item{subdir}{A character string specifying the subdirectory within the root path where
-the sample data is located, defaults to "fragmentomics/processed/matrix".}
+\item{subdir}{A character string specifying the
+subdirectory within the root path where
+the sample data is located, defaults
+to "fragmentomics/processed/matrix".}
 }
 \value{
 A list containing the loaded sample data.
 }
 \description{
 Load sample data from a samplesheet
-This function is intended to load sample data based on a provided samplesheet.
+This function is intended to load sample data
+based on a provided samplesheet.
 }
