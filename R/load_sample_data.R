@@ -25,10 +25,17 @@ load_sample_data <- function(samplesheet, rootpath, subdir = "fragmentomics/proc
         full.names = TRUE,
         recursive = TRUE
       )
-      m <- lapply(matrix_files, parse_compute_matrix)
-      matrices_names <- tools::file_path_sans_ext(base::basename(matrix_files))
-      names(m) <- matrices_names
-      m
+      all <- lapply(matrix_files, function(mf){
+        m <- parse_compute_matrix(mf)
+        s <- peak_stats(m)
+        list(
+          matrix = m,
+          stats = s
+        )
+      })
+      mnames <- tools::file_path_sans_ext(base::basename(matrix_files))
+      names(all) <- mnames
+      all
     })
     names(s) <- basename(sources)
     s
