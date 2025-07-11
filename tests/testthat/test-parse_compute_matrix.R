@@ -29,7 +29,7 @@ test_that("parse_compute_matrix from example file", {
   expect_true(all(is.na(result$bin_1[is.nan(result$bin_1)])))
   # Check if the data frame has the expected number of rows
   expect_equal(nrow(result), 1000)
-  expect_equal(ncol(result), 23 + 6 + 800)
+  expect_equal(ncol(result), 24 + 6 + 800)
 })
 
 test_that("parseComputeMatrix with non existent file", {

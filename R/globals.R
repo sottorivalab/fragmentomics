@@ -15,6 +15,7 @@ utils::globalVariables(
     "timepoint",
     "caseid",
     "sampleid",
-    "encoded_timepoint"
+    "encoded_timepoint",
+    "target"
   )
 )
