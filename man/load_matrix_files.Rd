@@ -22,9 +22,11 @@ load_matrix_files(
 
 \item{encoded_timepoint}{An integer specifying the encoded timepoint.}
 
-\item{rootpath}{A character string specifying the root path where the sample data is located.}
+\item{rootpath}{A character string specifying the root path where the sample
+data is located.}
 
-\item{subdir}{A character string specifying the subdirectory within the root path where
+\item{subdir}{A character string specifying the subdirectory
+within the root path where
 the sample data is located, defaults to "fragmentomics/processed/matrix".}
 }
 \description{
