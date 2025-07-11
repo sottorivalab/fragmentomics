@@ -14,6 +14,8 @@ test_that("test load_sample_data from example dir structure", {
   expect_true(is.list(s1))
   source1 <- s1[[1]]
   expect_true(is.list(source1))
-  m1 <- source1[[1]]
-  expect_true(is.data.frame(m1))
+  r1 <- source1[[1]]
+  expect_true(is.list(r1))
+  expect_true(is.data.frame(r1$matrix))
+  expect_true(is.list(r1$stats))
 })
