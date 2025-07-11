@@ -6,9 +6,33 @@
 #' @param rootpath A character string specifying the root path where the sample data is located.
 #' @param subdir A character string specifying the subdirectory within the root path where
 #' the sample data is located, defaults to "fragmentomics/processed/matrix".
+#' @returns A list containing the loaded sample data.
+#' @export
 load_sample_data <- function(samplesheet, rootpath, subdir = "fragmentomics/processed/matrix") {
-  samplesheet |> purrr::pmap(function(caseid, sampleid, timepoint, encoded_timepoint) {
+  samples <- samplesheet |> purrr::pmap(function(caseid, sampleid, timepoint, encoded_timepoint) {
+
+    # sample
     sample_root <- file.path(rootpath, caseid, sampleid, subdir)
-    print(sample_root)
+
+    # sources
+    sources <- list.dirs(sample_root, recursive = FALSE)
+
+    s <- lapply(sources, function(sourcedir){
+      # find matrices in subdirs
+      matrix_files <- list.files(
+        sourcedir,
+        pattern = "\\.gz$",
+        full.names = TRUE,
+        recursive = TRUE
+      )
+      m <- lapply(matrix_files, parse_compute_matrix)
+      matrices_names <- tools::file_path_sans_ext(base::basename(matrix_files))
+      names(m) <- matrices_names
+      m
+    })
+    names(s) <- basename(sources)
+    s
   })
+  names(samples) <- samplesheet$sampleid
+  samples
 }

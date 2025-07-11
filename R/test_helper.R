@@ -24,4 +24,5 @@ build_dir_structure <- function(root = getwd()) {
     dir.create(mpath, showWarnings = FALSE, recursive = TRUE)
     file.copy(elk4_example_file, mpath, overwrite = TRUE )
   })
+  fragdir
 }

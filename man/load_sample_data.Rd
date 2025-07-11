@@ -19,6 +19,9 @@ load_sample_data(
 \item{subdir}{A character string specifying the subdirectory within the root path where
 the sample data is located, defaults to "fragmentomics/processed/matrix".}
 }
+\value{
+A list containing the loaded sample data.
+}
 \description{
 Load sample data from a samplesheet
 This function is intended to load sample data based on a provided samplesheet.
