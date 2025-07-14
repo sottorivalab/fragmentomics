@@ -142,7 +142,7 @@ load_matrix_files <- function(
       sd <- basename(sourcedir)
       s <- peak_stats(m, signal_label = sampleid, source_label = sd)
       list(
-        matrix = m,
+        matrix = mf, # just keep a reference to the matrix file location
         peakstats = s
       )
     })
