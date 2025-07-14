@@ -9,7 +9,8 @@ based on a provided samplesheet.}
 load_experiment(
   samplesheet,
   rootpath,
-  subdir = "fragmentomics/processed/matrix"
+  subdir = "fragmentomics/processed/matrix",
+  parallelize = TRUE
 )
 }
 \arguments{

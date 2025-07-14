@@ -14,19 +14,44 @@
 #' @returns A list containing the loaded sample data.
 #' @export
 load_experiment <- function(samplesheet,
-                             rootpath,
-                             subdir = "fragmentomics/processed/matrix") {
-  samples <- samplesheet |> purrr::pmap(
-    function(caseid, sampleid, timepoint, encoded_timepoint) {
-      load_matrix_files(caseid,
-                        sampleid,
-                        timepoint,
-                        encoded_timepoint,
-                        rootpath,
-                        subdir)
-    },
-    .progress = TRUE
-  )
+                            rootpath,
+                            subdir = "fragmentomics/processed/matrix",
+                            parallelize = TRUE) {
+
+  if (!file.exists(rootpath)) {
+    stop("Root path does not exist: ", rootpath)
+  }
+
+  if (parallelize) {
+    samples <- samplesheet |> purrr::pmap(
+      purrr::in_parallel(
+        \(caseid, sampleid, timepoint, encoded_timepoint) {
+          fragmentomics::load_matrix_files(caseid,
+                            sampleid,
+                            timepoint,
+                            encoded_timepoint,
+                            rootpath,
+                            subdir)
+        },
+        rootpath = rootpath,
+        subdir = subdir
+      ),
+      .progress = TRUE
+    )
+  } else {
+    samples <- samplesheet |> purrr::pmap(
+      function (caseid, sampleid, timepoint, encoded_timepoint) {
+        load_matrix_files(caseid,
+                          sampleid,
+                          timepoint,
+                          encoded_timepoint,
+                          rootpath,
+                          subdir)
+      },
+      .progress = TRUE
+    )
+  }
+
   names(samples) <- samplesheet$sampleid
   cohort <- summarise_cohort(samples, samplesheet)
   targets <- group_targets(samples, samplesheet)
@@ -116,6 +141,7 @@ summarise_cohort <- function(samples, samplesheet) {
 #' @param subdir A character string specifying the subdirectory
 #' within the root path where
 #' the sample data is located, defaults to "fragmentomics/processed/matrix".
+#' @export
 load_matrix_files <- function(
     caseid,
     sampleid,
