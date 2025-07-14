@@ -2,10 +2,17 @@
 % Please edit documentation in R/target_plot.R
 \name{target_plot}
 \alias{target_plot}
-\title{Plot Target Data#' @title Plot Targets by Sample}
+\title{Plot Targets by Sample}
 \usage{
-target_plot(experiment, target, source)
+target_plot(experiment, target, source, palette = "Set1")
+}
+\arguments{
+\item{experiment}{An experiment object containing target data.}
+
+\item{target}{A character string specifying the target to plot.}
+
+\item{source}{A character string specifying the source sample to plot.}
 }
 \description{
-Plot Target Data#' @title Plot Targets by Sample
+This function plots target data for a specified target and source sample.
 }

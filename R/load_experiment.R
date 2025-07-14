@@ -24,7 +24,8 @@ load_experiment <- function(samplesheet,
                         encoded_timepoint,
                         rootpath,
                         subdir)
-    }
+    },
+    .progress = TRUE
   )
   names(samples) <- samplesheet$sampleid
   cohort <- summarise_cohort(samples, samplesheet)

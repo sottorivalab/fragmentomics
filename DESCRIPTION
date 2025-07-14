@@ -19,7 +19,7 @@ Imports:
   stringr,
   tibble,
   dplyr,
-  ggplot2,
+  ggplot2  (>= 3.5.2),
   readr,
   jsonlite,
   tidyr,
