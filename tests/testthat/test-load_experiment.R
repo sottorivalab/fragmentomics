@@ -16,6 +16,6 @@ test_that("test load_experiment from example dir structure", {
   expect_true(is.list(source1))
   r1 <- source1[[1]]
   expect_true(is.list(r1))
-  expect_true(is.data.frame(r1$matrix))
+  expect_true(is.character(r1$matrix))
   expect_true(is.list(r1$peakstats))
 })

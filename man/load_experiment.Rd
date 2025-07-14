@@ -10,7 +10,8 @@ load_experiment(
   samplesheet,
   rootpath,
   subdir = "fragmentomics/processed/matrix",
-  parallelize = TRUE
+  parallelize = TRUE,
+  number_of_daemons = parallel::detectCores()
 )
 }
 \arguments{
@@ -24,6 +25,11 @@ root path where the sample data is located.}
 subdirectory within the root path where
 the sample data is located, defaults
 to "fragmentomics/processed/matrix".}
+
+\item{parallelize}{A logical value indicating whether to parallelize the
+loading of sample data, defaults to TRUE.#' loading of sample data, defaults to TRUE.}
+
+\item{number_of_daemons}{An integer specifying the number of daemons to use}
 }
 \value{
 A list containing the loaded sample data.

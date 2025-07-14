@@ -11,18 +11,24 @@
 #' subdirectory within the root path where
 #' the sample data is located, defaults
 #' to "fragmentomics/processed/matrix".
+#' @param parallelize A logical value indicating whether to parallelize the
+#' loading of sample data, defaults to TRUE.#' loading of sample data, defaults to TRUE.
+#' @param number_of_daemons An integer specifying the number of daemons to use
 #' @returns A list containing the loaded sample data.
 #' @export
 load_experiment <- function(samplesheet,
                             rootpath,
                             subdir = "fragmentomics/processed/matrix",
-                            parallelize = TRUE) {
+                            parallelize = TRUE,
+                            number_of_daemons = parallel::detectCores()) {
 
   if (!file.exists(rootpath)) {
     stop("Root path does not exist: ", rootpath)
   }
 
   if (parallelize) {
+    # FIXME can be also slurm
+    mirai::daemons(number_of_daemons)
     samples <- samplesheet |> purrr::pmap(
       purrr::in_parallel(
         \(caseid, sampleid, timepoint, encoded_timepoint) {
@@ -35,13 +41,13 @@ load_experiment <- function(samplesheet,
         },
         rootpath = rootpath,
         subdir = subdir
-      ),
-      .progress = TRUE
+      )
     )
+    mirai::daemons(0)
   } else {
     samples <- samplesheet |> purrr::pmap(
       function (caseid, sampleid, timepoint, encoded_timepoint) {
-        load_matrix_files(caseid,
+        fragmentomics::load_matrix_files(caseid,
                           sampleid,
                           timepoint,
                           encoded_timepoint,

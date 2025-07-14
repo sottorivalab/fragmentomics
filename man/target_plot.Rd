@@ -12,6 +12,8 @@ target_plot(experiment, target, source, palette = "Set1")
 \item{target}{A character string specifying the target to plot.}
 
 \item{source}{A character string specifying the source sample to plot.}
+
+\item{palette}{A character string specifying the color palette to use for the plot.}
 }
 \description{
 This function plots target data for a specified target and source sample.

@@ -5,6 +5,7 @@
 #' @param experiment An experiment object containing target data.
 #' @param target A character string specifying the target to plot.
 #' @param source A character string specifying the source sample to plot.
+#' @param palette A character string specifying the color palette to use for the plot.
 #'
 target_plot <- function(experiment, target, source, palette = "Set1") {
   # set colors

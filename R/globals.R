@@ -17,6 +17,7 @@ utils::globalVariables(
     "sampleid",
     "encoded_timepoint",
     "target",
-    "signal_label"
+    "signal_label",
+    "targetid"
   )
 )
