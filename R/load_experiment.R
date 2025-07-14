@@ -12,7 +12,8 @@
 #' the sample data is located, defaults
 #' to "fragmentomics/processed/matrix".
 #' @param parallelize A logical value indicating whether to parallelize the
-#' loading of sample data, defaults to TRUE.#' loading of sample data, defaults to TRUE.
+#' loading of sample data, defaults to TRUE.#' loading of sample data,
+#' defaults to TRUE.
 #' @param number_of_daemons An integer specifying the number of daemons to use
 #' @returns A list containing the loaded sample data.
 #' @export
@@ -33,11 +34,11 @@ load_experiment <- function(samplesheet,
       purrr::in_parallel(
         \(caseid, sampleid, timepoint, encoded_timepoint) {
           fragmentomics::load_matrix_files(caseid,
-                            sampleid,
-                            timepoint,
-                            encoded_timepoint,
-                            rootpath,
-                            subdir)
+                                           sampleid,
+                                           timepoint,
+                                           encoded_timepoint,
+                                           rootpath,
+                                           subdir)
         },
         rootpath = rootpath,
         subdir = subdir
@@ -46,13 +47,13 @@ load_experiment <- function(samplesheet,
     mirai::daemons(0)
   } else {
     samples <- samplesheet |> purrr::pmap(
-      function (caseid, sampleid, timepoint, encoded_timepoint) {
+      function(caseid, sampleid, timepoint, encoded_timepoint) {
         fragmentomics::load_matrix_files(caseid,
-                          sampleid,
-                          timepoint,
-                          encoded_timepoint,
-                          rootpath,
-                          subdir)
+                                         sampleid,
+                                         timepoint,
+                                         encoded_timepoint,
+                                         rootpath,
+                                         subdir)
       },
       .progress = TRUE
     )

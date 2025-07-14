@@ -27,7 +27,8 @@ the sample data is located, defaults
 to "fragmentomics/processed/matrix".}
 
 \item{parallelize}{A logical value indicating whether to parallelize the
-loading of sample data, defaults to TRUE.#' loading of sample data, defaults to TRUE.}
+loading of sample data, defaults to TRUE.#' loading of sample data,
+defaults to TRUE.}
 
 \item{number_of_daemons}{An integer specifying the number of daemons to use}
 }

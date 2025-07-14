@@ -26,25 +26,25 @@ build_dir_structure <- function(root = getwd()) {
                                   sampleid,
                                   timepoint,
                                   encoded_timepoint) {
-  mpath <- file.path(fragdir,
-                     caseid,
-                     sampleid,
-                     "fragmentomics",
-                     "processed",
-                     "matrix",
-                     "source_1",
-                     "CTCF")
-  dir.create(mpath, showWarnings = FALSE, recursive = TRUE)
-  file.copy(ctcf_example_file, mpath, overwrite = TRUE)
-  mpath <- file.path(fragdir,
-                     caseid,
-                     sampleid,
-                     "fragmentomics",
-                     "processed",
-                     "matrix",
-                     "source_1",
-                     "ELK4")
-  dir.create(mpath, showWarnings = FALSE, recursive = TRUE)
+    mpath <- file.path(fragdir,
+                       caseid,
+                       sampleid,
+                       "fragmentomics",
+                       "processed",
+                       "matrix",
+                       "source_1",
+                       "CTCF")
+    dir.create(mpath, showWarnings = FALSE, recursive = TRUE)
+    file.copy(ctcf_example_file, mpath, overwrite = TRUE)
+    mpath <- file.path(fragdir,
+                       caseid,
+                       sampleid,
+                       "fragmentomics",
+                       "processed",
+                       "matrix",
+                       "source_1",
+                       "ELK4")
+    dir.create(mpath, showWarnings = FALSE, recursive = TRUE)
     file.copy(elk4_example_file, mpath, overwrite = TRUE)
   })
   fragdir
