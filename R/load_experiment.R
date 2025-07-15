@@ -21,7 +21,7 @@
 #' @export
 load_experiment <- function(samplesheet,
                             rootpath,
-                            subdir = "fragmentomics/processed/matrix",
+                            subdir = "fragmentomics/processed",
                             parallelize = TRUE,
                             number_of_daemons = parallel::detectCores()) {
 
@@ -29,25 +29,25 @@ load_experiment <- function(samplesheet,
     stop("Root path does not exist: ", rootpath)
   }
 
-  if (parallelize) {
-    # FIXME can be also slurm
-    mirai::daemons(number_of_daemons)
-    samples <- samplesheet |> purrr::pmap(
-      purrr::in_parallel(
-        \(caseid, sampleid, timepoint, encoded_timepoint) {
-          fragmentomics::load_data_files(caseid,
-                                           sampleid,
-                                           timepoint,
-                                           encoded_timepoint,
-                                           rootpath,
-                                           subdir)
-        },
-        rootpath = rootpath,
-        subdir = subdir
-      )
-    )
-    mirai::daemons(0)
-  } else {
+  # if (parallelize) {
+  #   # FIXME can be also slurm
+  #   mirai::daemons(number_of_daemons)
+  #   samples <- samplesheet |> purrr::pmap(
+  #     purrr::in_parallel(
+  #       \(caseid, sampleid, timepoint, encoded_timepoint) {
+  #         fragmentomics::load_data_files(caseid,
+  #                                          sampleid,
+  #                                          timepoint,
+  #                                          encoded_timepoint,
+  #                                          rootpath,
+  #                                          subdir)
+  #       },
+  #       rootpath = rootpath,
+  #       subdir = subdir
+  #     )
+  #   )
+  #   mirai::daemons(0)
+  # } else {
     samples <- samplesheet |> purrr::pmap(
       function(caseid, sampleid, timepoint, encoded_timepoint) {
         fragmentomics::load_data_files(caseid,
@@ -59,17 +59,18 @@ load_experiment <- function(samplesheet,
       },
       .progress = TRUE
     )
-  }
+    samples
+  # }
 
-  names(samples) <- samplesheet$sampleid
-  cohort <- summarise_cohort(samples, samplesheet)
-  targets <- group_targets(samples, samplesheet)
+  # names(samples) <- samplesheet$sampleid
+  # cohort <- summarise_cohort(samples, samplesheet)
+  # targets <- group_targets(samples, samplesheet)
 
-  list(
-    samples = samples,
-    cohort = cohort,
-    targets = targets
-  )
+  # list(
+  #   samples = samples,
+  #   cohort = cohort,
+  #   targets = targets
+  # )
 }
 
 #'

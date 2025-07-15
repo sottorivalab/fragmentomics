@@ -9,7 +9,7 @@ based on a provided samplesheet.}
 load_experiment(
   samplesheet,
   rootpath,
-  subdir = "fragmentomics/processed/matrix",
+  subdir = "fragmentomics/processed",
   parallelize = TRUE,
   number_of_daemons = parallel::detectCores()
 )

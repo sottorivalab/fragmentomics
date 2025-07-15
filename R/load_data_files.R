@@ -11,7 +11,7 @@
 #' data is located.
 #' @param subdir A character string specifying the subdirectory
 #' within the root path where
-#' the sample data is located, defaults to "fragmentomics/processed/matrix".
+#' the sample data is located, defaults to "fragmentomics/processed".
 #' @export
 load_data_files <- function(
     caseid,
@@ -20,20 +20,34 @@ load_data_files <- function(
     encoded_timepoint,
     rootpath,
     subdir) {
-  # sample
+
+  # sample root
   sample_root <- file.path(rootpath, caseid, sampleid, subdir)
 
   # sources
   sources <- list.dirs(sample_root, recursive = FALSE)
 
   samples_data <- lapply(sources, function(sourcedir) {
+
     # find matrices in subdirs
+    matrixdir <- file.path(subdir,"matrix")
     matrix_files <- list.files(
-      sourcedir,
+      matrixdir,
       pattern = "\\.gz$",
       full.names = TRUE,
       recursive = TRUE
     )
+
+    # find peak stats in subdir
+    peakstatsdir <- file.path(subdir,"peakstats")
+    peak_stats_files <- list.files(
+      sourcedir,
+      pattern = "_peak_stats.tsv$",
+      full.names = TRUE,
+      recursive = TRUE
+    )
+
+    # FIXME from here
     all <- lapply(matrix_files, function(mf) {
       m <- parse_compute_matrix(mf)
       sd <- basename(sourcedir)
@@ -43,10 +57,12 @@ load_data_files <- function(
         peakstats = s
       )
     })
+
     mnames <- tools::file_path_sans_ext(base::basename(matrix_files))
     names(all) <- mnames
     all
   })
+
   names(samples_data) <- basename(sources)
   samples_data
 }
