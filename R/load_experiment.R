@@ -16,6 +16,7 @@
 #' defaults to TRUE.
 #' @param number_of_daemons An integer specifying the number of daemons to use
 #' @returns A list containing the loaded sample data.
+#'
 #' @export
 load_experiment <- function(samplesheet,
                             rootpath,
