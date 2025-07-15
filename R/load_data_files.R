@@ -61,6 +61,13 @@ load_data_files <- function(
         # build tibble
         fragmentomics::parse_peak_stats(peak_stats_file) |>
           dplyr::mutate(
+            caseid = caseid,
+            sampleid = sampleid,
+            timepoint = timepoint,
+            encoded_timepoint = encoded_timepoint,
+            .before = 1
+          ) |>
+          dplyr::mutate(
             peakfile = peak_data_file,
             matrixfile = matrix_file_name,
             .after = "source"

@@ -44,7 +44,8 @@ load_experiment <- function(samplesheet,
         },
         rootpath = rootpath,
         subdir = subdir
-      )
+      ),
+      .progress = TRUE
     ) |> dplyr::bind_rows()
     mirai::daemons(0)
     samples
@@ -63,67 +64,4 @@ load_experiment <- function(samplesheet,
   }
 }
 
-#'
-#' Group targets data
-#'
-#' @param samples A list of samples matrices loaded from the samplesheet.
-#' @param samplesheet A tibble containing the samplesheet data.
-#'
-group_targets <- function(samples, samplesheet) {
-  # group by sources and targets
-  source_names <- unique(unlist(lapply(samples, function(sample) {
-    names(sample)
-  })))
-
-  targets <- lapply(source_names, function(source_name) {
-    dplyr::bind_rows(
-      lapply(names(samples), function(sample_name) {
-        sample <- samples[[sample_name]]
-        dplyr::bind_rows(
-          lapply(sample[[source_name]], function(target) {
-            t <- target$peakstats$average |>
-              dplyr::mutate(
-                sampleid = sample_name,
-                .before = 1
-              ) |>
-              dplyr::mutate(
-                targetid = unique(target$peakstats$stats$target_label),
-                .before = 1
-              )
-            dplyr::left_join(t, samplesheet, by = dplyr::join_by("sampleid")) |>
-              dplyr::relocate(dplyr::any_of(names(samplesheet)), .before = 1)
-          })
-        )
-      })
-    )
-  })
-  names(targets) <- source_names
-  targets
-}
-
-#'
-#' Summarise cohort data
-#' This function is intended to summarise cohort data.
-#'
-#' @param samples A list of samples matrices loaded from the samplesheet.
-#' @param samplesheet A tibble containing the samplesheet data.
-#'
-summarise_cohort <- function(samples, samplesheet) {
-  # summarise cohort
-  cohort <- dplyr::bind_rows(lapply(samples, function(sample) {
-    dplyr::bind_rows(lapply(sample, function(source) {
-      dplyr::bind_rows(lapply(source, function(target) {
-        target$peakstats$stats
-      }))
-    }))
-  }))
-
-  # cohort
-  jb <- dplyr::join_by("signal_label" == "sampleid")
-  cohort <- dplyr::left_join(cohort, samplesheet, by = jb) |>
-    dplyr::mutate(sampleid = signal_label) |>
-    dplyr::relocate(dplyr::any_of(names(samplesheet)), .before = 1)
-
-  cohort
-}
 
