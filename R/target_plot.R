@@ -12,6 +12,7 @@
 target_plot <- function(experiment, target, source, palette = "Set1") {
   # set colors
   palette <- RColorBrewer::brewer.pal(7, palette)
+
   mdata <- experiment$targets[[source]] |>
     dplyr::filter(targetid == target) |>
     dplyr::group_by(caseid)

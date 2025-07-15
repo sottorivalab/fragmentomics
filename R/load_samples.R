@@ -14,7 +14,7 @@
 #' within the root path where
 #' the sample data is located, defaults to "fragmentomics/processed".
 #' @export
-load_data_files <- function(
+load_samples <- function(
     caseid,
     sampleid,
     timepoint,
@@ -57,6 +57,13 @@ load_data_files <- function(
         matrix_file_name <- file.path(matrix_path,
                                       paste(basename(target_dir),
                                             ".gz", sep = ""))
+
+        if (!file.exists(matrix_file_name)) {
+          matrix_file_name <- file.path(matrix_path,
+                                        paste(basename(target_dir),
+                                              "_matrix.gz", sep = ""))
+        }
+
         if (!file.exists(matrix_file_name)) {
           stop("matrix_file_name path does not exist: ", matrix_file_name)
         }

@@ -35,12 +35,12 @@ load_experiment <- function(samplesheet,
     samples <- samplesheet |> purrr::pmap(
       purrr::in_parallel(
         \(caseid, sampleid, timepoint, encoded_timepoint) {
-          fragmentomics::load_data_files(caseid,
-                                         sampleid,
-                                         timepoint,
-                                         encoded_timepoint,
-                                         rootpath,
-                                         subdir)
+          fragmentomics::load_samples(caseid,
+                                      sampleid,
+                                      timepoint,
+                                      encoded_timepoint,
+                                      rootpath,
+                                      subdir)
         },
         rootpath = rootpath,
         subdir = subdir
@@ -53,7 +53,7 @@ load_experiment <- function(samplesheet,
   } else {
     samplesheet |> purrr::pmap(
       function(caseid, sampleid, timepoint, encoded_timepoint) {
-        fragmentomics::load_data_files(caseid,
+        fragmentomics::load_samples(caseid,
                                        sampleid,
                                        timepoint,
                                        encoded_timepoint,
