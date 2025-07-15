@@ -1,4 +1,10 @@
 #' Parse peak data
+#'
+#'
+#' This function reads peak data from a file and returns it as a tibble.
+#'
+#' @param file A character string specifying the path to the peak data file.
+#'
 #' @export
 parse_peak_data <- function(file) {
   readr::read_tsv(

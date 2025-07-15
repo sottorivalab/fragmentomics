@@ -6,6 +6,9 @@
 \usage{
 parse_peak_data(file)
 }
+\arguments{
+\item{file}{A character string specifying the path to the peak data file.}
+}
 \description{
-Parse peak data
+This function reads peak data from a file and returns it as a tibble.
 }
