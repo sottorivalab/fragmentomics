@@ -44,8 +44,7 @@ load_experiment <- function(samplesheet,
         },
         rootpath = rootpath,
         subdir = subdir
-      ),
-      .progress = TRUE
+      )
     ) |>
       dplyr::bind_rows()
     mirai::daemons(0)
@@ -53,14 +52,9 @@ load_experiment <- function(samplesheet,
   } else {
     samplesheet |> purrr::pmap(
       function(caseid, sampleid, timepoint, encoded_timepoint) {
-        fragmentomics::load_samples(caseid,
-                                       sampleid,
-                                       timepoint,
-                                       encoded_timepoint,
-                                       rootpath,
-                                       subdir)
-      },
-      .progress = TRUE
+        fragmentomics::load_samples(caseid, sampleid, timepoint,
+                                    encoded_timepoint, rootpath, subdir)
+      }
     ) |>
       dplyr::bind_rows()
   }
