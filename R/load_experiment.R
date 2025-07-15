@@ -15,6 +15,7 @@
 #' loading of sample data, defaults to TRUE.#' loading of sample data,
 #' defaults to TRUE.
 #' @param number_of_daemons An integer specifying the number of daemons to use
+#'
 #' @returns A list containing the loaded sample data.
 #'
 #' @export
@@ -34,7 +35,7 @@ load_experiment <- function(samplesheet,
     samples <- samplesheet |> purrr::pmap(
       purrr::in_parallel(
         \(caseid, sampleid, timepoint, encoded_timepoint) {
-          fragmentomics::load_matrix_files(caseid,
+          fragmentomics::load_data_files(caseid,
                                            sampleid,
                                            timepoint,
                                            encoded_timepoint,
@@ -49,7 +50,7 @@ load_experiment <- function(samplesheet,
   } else {
     samples <- samplesheet |> purrr::pmap(
       function(caseid, sampleid, timepoint, encoded_timepoint) {
-        fragmentomics::load_matrix_files(caseid,
+        fragmentomics::load_data_files(caseid,
                                          sampleid,
                                          timepoint,
                                          encoded_timepoint,
@@ -135,55 +136,3 @@ summarise_cohort <- function(samples, samplesheet) {
   cohort
 }
 
-#'
-#' Load matrix files from a directory
-#'
-#' This function is intended to load matrix files from a specified directory.
-#'
-#' @param caseid A character string specifying the case ID.
-#' @param sampleid A character string specifying the sample ID.
-#' @param timepoint A factor specifying the timepoint.
-#' @param encoded_timepoint An integer specifying the encoded timepoint.
-#' @param rootpath A character string specifying the root path where the sample
-#' data is located.
-#' @param subdir A character string specifying the subdirectory
-#' within the root path where
-#' the sample data is located, defaults to "fragmentomics/processed/matrix".
-#' @export
-load_matrix_files <- function(
-    caseid,
-    sampleid,
-    timepoint,
-    encoded_timepoint,
-    rootpath,
-    subdir) {
-  # sample
-  sample_root <- file.path(rootpath, caseid, sampleid, subdir)
-
-  # sources
-  sources <- list.dirs(sample_root, recursive = FALSE)
-
-  sample_matrices <- lapply(sources, function(sourcedir) {
-    # find matrices in subdirs
-    matrix_files <- list.files(
-      sourcedir,
-      pattern = "\\.gz$",
-      full.names = TRUE,
-      recursive = TRUE
-    )
-    all <- lapply(matrix_files, function(mf) {
-      m <- parse_compute_matrix(mf)
-      sd <- basename(sourcedir)
-      s <- peak_stats(m, signal_label = sampleid, source_label = sd)
-      list(
-        matrix = mf, # just keep a reference to the matrix file location
-        peakstats = s
-      )
-    })
-    mnames <- tools::file_path_sans_ext(base::basename(matrix_files))
-    names(all) <- mnames
-    all
-  })
-  names(sample_matrices) <- basename(sources)
-  sample_matrices
-}
