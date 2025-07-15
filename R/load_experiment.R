@@ -16,7 +16,7 @@
 #' defaults to TRUE.
 #' @param number_of_daemons An integer specifying the number of daemons to use
 #'
-#' @returns A list containing the loaded sample data.
+#' @returns A tibble
 #'
 #' @export
 load_experiment <- function(samplesheet,
@@ -29,48 +29,38 @@ load_experiment <- function(samplesheet,
     stop("Root path does not exist: ", rootpath)
   }
 
-  # if (parallelize) {
-  #   # FIXME can be also slurm
-  #   mirai::daemons(number_of_daemons)
-  #   samples <- samplesheet |> purrr::pmap(
-  #     purrr::in_parallel(
-  #       \(caseid, sampleid, timepoint, encoded_timepoint) {
-  #         fragmentomics::load_data_files(caseid,
-  #                                          sampleid,
-  #                                          timepoint,
-  #                                          encoded_timepoint,
-  #                                          rootpath,
-  #                                          subdir)
-  #       },
-  #       rootpath = rootpath,
-  #       subdir = subdir
-  #     )
-  #   )
-  #   mirai::daemons(0)
-  # } else {
+  if (parallelize) {
+    # FIXME can be also slurm
+    mirai::daemons(number_of_daemons)
     samples <- samplesheet |> purrr::pmap(
+      purrr::in_parallel(
+        \(caseid, sampleid, timepoint, encoded_timepoint) {
+            fragmentomics::load_data_files(caseid,
+                                           sampleid,
+                                           timepoint,
+                                           encoded_timepoint,
+                                           rootpath,
+                                           subdir)
+        },
+        rootpath = rootpath,
+        subdir = subdir
+      )
+    ) |> dplyr::bind_rows()
+    mirai::daemons(0)
+    samples
+  } else {
+    samplesheet |> purrr::pmap(
       function(caseid, sampleid, timepoint, encoded_timepoint) {
         fragmentomics::load_data_files(caseid,
-                                         sampleid,
-                                         timepoint,
-                                         encoded_timepoint,
-                                         rootpath,
-                                         subdir)
+                                       sampleid,
+                                       timepoint,
+                                       encoded_timepoint,
+                                       rootpath,
+                                       subdir)
       },
       .progress = TRUE
-    )
-    samples
-  # }
-
-  # names(samples) <- samplesheet$sampleid
-  # cohort <- summarise_cohort(samples, samplesheet)
-  # targets <- group_targets(samples, samplesheet)
-
-  # list(
-  #   samples = samples,
-  #   cohort = cohort,
-  #   targets = targets
-  # )
+    ) |> dplyr::bind_rows()
+  }
 }
 
 #'

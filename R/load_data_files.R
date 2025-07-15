@@ -1,7 +1,7 @@
 #'
-#' Load data files from a directory
+#' Load data files from a sample directory
 #'
-#' This function is intended to load data files from a specified directory.
+#' This function is intended to load data files from a specified sample directory.
 #'
 #' @param caseid A character string specifying the case ID.
 #' @param sampleid A character string specifying the sample ID.
@@ -21,48 +21,52 @@ load_data_files <- function(
     rootpath,
     subdir) {
 
-  # sample root
+  # sample root example: "results/SAMPLE_3/SAMPLE_3_PD/fragmentomics/processed"
   sample_root <- file.path(rootpath, caseid, sampleid, subdir)
 
-  # sources
-  sources <- list.dirs(sample_root, recursive = FALSE)
+  # list sources in peak stats dir
+  peakstats_dir <- file.path(sample_root,"peakstats")
+  sources <- list.dirs(peakstats_dir, recursive = FALSE)
 
-  samples_data <- lapply(sources, function(sourcedir) {
+  # iterate in sources
+  samples_data <- dplyr::bind_rows(lapply(sources, function(sourcedir) {
 
-    # find matrices in subdirs
-    matrixdir <- file.path(subdir,"matrix")
-    matrix_files <- list.files(
-      matrixdir,
-      pattern = "\\.gz$",
-      full.names = TRUE,
-      recursive = TRUE
+    # iterate in targets
+    target_dirs <- list.dirs(sourcedir, recursive = FALSE)
+
+    dplyr::bind_rows(
+      lapply(target_dirs, function(target_dir){
+
+        # stats file
+        pf_name <- paste(basename(target_dir), "_peak_stats.tsv", sep = "")
+        peak_stats_file <- file.path(target_dir, pf_name)
+        if (!file.exists(peak_stats_file)) {
+          stop("peak_stats_file path does not exist: ", peak_stats_file)
+        }
+
+        # data file
+        pf_name <- paste(basename(target_dir), "_peak_data.tsv", sep = "")
+        peak_data_file <- file.path(target_dir, pf_name)
+        if (!file.exists(peak_data_file)) {
+          stop("peak_data_file path does not exist: ", peak_data_file)
+        }
+
+        # find corresponding matrix file
+        matrix_path <- stringr::str_replace(target_dir, "peakstats", "matrix")
+        matrix_file_name <- file.path(matrix_path, paste(basename(target_dir), ".gz", sep=""))
+        if (!file.exists(matrix_file_name)) {
+          stop("matrix_file_name path does not exist: ", matrix_file_name)
+        }
+
+        # build tibble
+        fragmentomics::parse_peak_stats(peak_stats_file) |>
+          dplyr::mutate(
+            peakfile = peak_data_file,
+            matrixfile = matrix_file_name,
+            .after = "source"
+          )
+      })
     )
+  }))
 
-    # find peak stats in subdir
-    peakstatsdir <- file.path(subdir,"peakstats")
-    peak_stats_files <- list.files(
-      sourcedir,
-      pattern = "_peak_stats.tsv$",
-      full.names = TRUE,
-      recursive = TRUE
-    )
-
-    # FIXME from here
-    all <- lapply(matrix_files, function(mf) {
-      m <- parse_compute_matrix(mf)
-      sd <- basename(sourcedir)
-      s <- peak_stats(m, signal_label = sampleid, source_label = sd)
-      list(
-        matrix = mf, # just keep a reference to the matrix file location
-        peakstats = s
-      )
-    })
-
-    mnames <- tools::file_path_sans_ext(base::basename(matrix_files))
-    names(all) <- mnames
-    all
-  })
-
-  names(samples_data) <- basename(sources)
-  samples_data
 }

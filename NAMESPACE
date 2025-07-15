@@ -3,6 +3,7 @@
 export(load_data_files)
 export(load_experiment)
 export(parse_compute_matrix)
+export(parse_peak_stats)
 export(parse_samplesheet)
 export(peak_plot)
 export(peak_stats)

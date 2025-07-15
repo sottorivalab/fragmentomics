@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_data_files.R
 \name{load_data_files}
 \alias{load_data_files}
-\title{Load data files from a directory}
+\title{Load data files from a sample directory}
 \usage{
 load_data_files(
   caseid,
@@ -30,5 +30,5 @@ within the root path where
 the sample data is located, defaults to "fragmentomics/processed".}
 }
 \description{
-This function is intended to load data files from a specified directory.
+This function is intended to load data files from a specified sample directory.
 }

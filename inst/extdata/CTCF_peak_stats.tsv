@@ -1,2 +1,2 @@
 signal	target	source	integration	background.mean	referencePoint.bin	referencePoint.coverage	referencePoint.relative	central.coverage	central.coverage.bin.min	central.coverage.bin.max	background.left.limit	background.right.limit	average.coverage	average.coverage.bin.min	average.coverage.bin.max	peak.length	peak.relative.length
-MAYA_119_BL	CTCF	single_region_files	0.0672	1.190005861577212	400	0.5404522613065327	0.4541593270727483	0.5492806891600862	397	403	50	750	1.0340965714104065	300	500	0.6495536002706793	0.5458406729272517
+MAYA_119_BL	CTCF	source_1	0.0672	1.190005861577212	400	0.5404522613065327	0.4541593270727483	0.5492806891600862	397	403	50	750	1.0340965714104065	300	500	0.6495536002706793	0.5458406729272517

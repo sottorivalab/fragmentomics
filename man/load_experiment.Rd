@@ -33,7 +33,7 @@ defaults to TRUE.}
 \item{number_of_daemons}{An integer specifying the number of daemons to use}
 }
 \value{
-A list containing the loaded sample data.
+A tibble
 }
 \description{
 Load sample data from a samplesheet
