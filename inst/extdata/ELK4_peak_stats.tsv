@@ -1,0 +1,2 @@
+signal	target	source	integration	background.mean	referencePoint.bin	referencePoint.coverage	referencePoint.relative	central.coverage	central.coverage.bin.min	central.coverage.bin.max	background.left.limit	background.right.limit	average.coverage	average.coverage.bin.min	average.coverage.bin.max	peak.length	peak.relative.length
+MAYA_119_BL	ELK4	single_region_files	0.2071	1.1387024343939138	400	0.8635184807024708	0.7583355006719447	0.8604553808454155	397	403	50	750	0.9469257708768628	300	500	0.275183953691443	0.24166449932805534
