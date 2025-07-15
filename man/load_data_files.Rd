@@ -30,5 +30,6 @@ within the root path where
 the sample data is located, defaults to "fragmentomics/processed".}
 }
 \description{
-This function is intended to load data files from a specified sample directory.
+This function is intended to load data files from a
+specified sample directory.
 }

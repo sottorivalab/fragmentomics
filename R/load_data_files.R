@@ -1,7 +1,8 @@
 #'
 #' Load data files from a sample directory
 #'
-#' This function is intended to load data files from a specified sample directory.
+#' This function is intended to load data files from a
+#' specified sample directory.
 #'
 #' @param caseid A character string specifying the case ID.
 #' @param sampleid A character string specifying the sample ID.
@@ -25,17 +26,17 @@ load_data_files <- function(
   sample_root <- file.path(rootpath, caseid, sampleid, subdir)
 
   # list sources in peak stats dir
-  peakstats_dir <- file.path(sample_root,"peakstats")
+  peakstats_dir <- file.path(sample_root, "peakstats")
   sources <- list.dirs(peakstats_dir, recursive = FALSE)
 
   # iterate in sources
-  samples_data <- dplyr::bind_rows(lapply(sources, function(sourcedir) {
+  dplyr::bind_rows(lapply(sources, function(sourcedir) {
 
     # iterate in targets
     target_dirs <- list.dirs(sourcedir, recursive = FALSE)
 
     dplyr::bind_rows(
-      lapply(target_dirs, function(target_dir){
+      lapply(target_dirs, function(target_dir) {
 
         # stats file
         pf_name <- paste(basename(target_dir), "_peak_stats.tsv", sep = "")
@@ -53,7 +54,9 @@ load_data_files <- function(
 
         # find corresponding matrix file
         matrix_path <- stringr::str_replace(target_dir, "peakstats", "matrix")
-        matrix_file_name <- file.path(matrix_path, paste(basename(target_dir), ".gz", sep=""))
+        matrix_file_name <- file.path(matrix_path,
+                                      paste(basename(target_dir),
+                                            ".gz", sep = ""))
         if (!file.exists(matrix_file_name)) {
           stop("matrix_file_name path does not exist: ", matrix_file_name)
         }

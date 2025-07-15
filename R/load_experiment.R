@@ -35,18 +35,19 @@ load_experiment <- function(samplesheet,
     samples <- samplesheet |> purrr::pmap(
       purrr::in_parallel(
         \(caseid, sampleid, timepoint, encoded_timepoint) {
-            fragmentomics::load_data_files(caseid,
-                                           sampleid,
-                                           timepoint,
-                                           encoded_timepoint,
-                                           rootpath,
-                                           subdir)
+          fragmentomics::load_data_files(caseid,
+                                         sampleid,
+                                         timepoint,
+                                         encoded_timepoint,
+                                         rootpath,
+                                         subdir)
         },
         rootpath = rootpath,
         subdir = subdir
       ),
       .progress = TRUE
-    ) |> dplyr::bind_rows()
+    ) |>
+      dplyr::bind_rows()
     mirai::daemons(0)
     samples
   } else {
@@ -60,8 +61,7 @@ load_experiment <- function(samplesheet,
                                        subdir)
       },
       .progress = TRUE
-    ) |> dplyr::bind_rows()
+    ) |>
+      dplyr::bind_rows()
   }
 }
-
-

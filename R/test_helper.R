@@ -4,7 +4,8 @@
 #'
 #' @param root the root directory to build the structure dirs
 #'
-build_dir_structure <- function(root = getwd()) {fragdir <- file.path(root, "results")
+build_dir_structure <- function(root = getwd()) {
+  fragdir <- file.path(root, "results")
   dir.create(fragdir, showWarnings = FALSE)
 
   # build directory structure for samplesheet.csv
@@ -32,12 +33,12 @@ build_dir_structure <- function(root = getwd()) {fragdir <- file.path(root, "res
                                  package = "fragmentomics")
 
   ctcf_data_file <- system.file("extdata",
-                                 "CTCF_peak_data.tsv",
-                                 package = "fragmentomics")
+                                "CTCF_peak_data.tsv",
+                                package = "fragmentomics")
 
   elk4_data_file <- system.file("extdata",
-                                 "ELK4_peak_data.tsv",
-                                 package = "fragmentomics")
+                                "ELK4_peak_data.tsv",
+                                package = "fragmentomics")
 
   samples |> purrr::pmap(function(caseid,
                                   sampleid,
