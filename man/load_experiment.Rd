@@ -33,10 +33,17 @@ defaults to TRUE.}
 \item{number_of_daemons}{An integer specifying the number of daemons to use}
 }
 \value{
-A tibble
+A tibble containing the loaded sample data.
 }
 \description{
 Load sample data from a samplesheet
 This function is intended to load sample data
 based on a provided samplesheet.
+}
+\examples{
+\donotrun{
+example_samplesheet <- system.file("extdata","samplesheet.csv",package = "fragmentomics")
+samplesheet <- parse_samplesheet(example_samplesheet)
+experiment <- load_experiment(samplesheet, "results")
+}
 }

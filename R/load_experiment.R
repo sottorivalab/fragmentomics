@@ -16,8 +16,14 @@
 #' defaults to TRUE.
 #' @param number_of_daemons An integer specifying the number of daemons to use
 #'
-#' @returns A tibble
+#' @returns A tibble containing the loaded sample data.
 #'
+#' @examples
+#' \donotrun{
+#' example_samplesheet <- system.file("extdata","samplesheet.csv",package = "fragmentomics")
+#' samplesheet <- parse_samplesheet(example_samplesheet)
+#' experiment <- load_experiment(samplesheet, "results")
+#' }
 #' @export
 load_experiment <- function(samplesheet,
                             rootpath,
@@ -35,12 +41,8 @@ load_experiment <- function(samplesheet,
     samples <- samplesheet |> purrr::pmap(
       purrr::in_parallel(
         \(caseid, sampleid, timepoint, encoded_timepoint) {
-          fragmentomics::load_samples(caseid,
-                                      sampleid,
-                                      timepoint,
-                                      encoded_timepoint,
-                                      rootpath,
-                                      subdir)
+          fragmentomics::load_sample(caseid, sampleid, timepoint,
+                                     encoded_timepoint, rootpath, subdir)
         },
         rootpath = rootpath,
         subdir = subdir
@@ -52,8 +54,8 @@ load_experiment <- function(samplesheet,
   } else {
     samplesheet |> purrr::pmap(
       function(caseid, sampleid, timepoint, encoded_timepoint) {
-        fragmentomics::load_samples(caseid, sampleid, timepoint,
-                                    encoded_timepoint, rootpath, subdir)
+        fragmentomics::load_sample(caseid, sampleid, timepoint,
+                                   encoded_timepoint, rootpath, subdir)
       }
     ) |>
       dplyr::bind_rows()

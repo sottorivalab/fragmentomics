@@ -9,6 +9,14 @@ parse_peak_data(file)
 \arguments{
 \item{file}{A character string specifying the path to the peak data file.}
 }
+\value{
+A tibble containing the parsed peak data.
+}
 \description{
 This function reads peak data from a file and returns it as a tibble.
+}
+\examples{
+file <- system.file("extdata", "CTCF_peak_data.tsv", package = "fragmentomics")
+peak_data <- parse_peak_data(file)
+
 }

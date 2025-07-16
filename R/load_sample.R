@@ -14,7 +14,7 @@
 #' within the root path where
 #' the sample data is located, defaults to "fragmentomics/processed".
 #' @export
-load_samples <- function(
+load_sample <- function(
     caseid,
     sampleid,
     timepoint,

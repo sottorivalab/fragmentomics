@@ -5,6 +5,12 @@
 #'
 #' @param file A character string specifying the path to the peak data file.
 #'
+#' @return A tibble containing the parsed peak data.
+#'
+#' @examples
+#' file <- system.file("extdata", "CTCF_peak_data.tsv", package = "fragmentomics")
+#' peak_data <- parse_peak_data(file)
+#'
 #' @export
 parse_peak_data <- function(file) {
   readr::read_tsv(

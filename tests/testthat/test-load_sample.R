@@ -1,4 +1,4 @@
-test_that("test load_samples from example dir structure", {
+test_that("test load_sample from example dir structure", {
   tmpdir <- withr::local_tempdir()
   fragdir <- build_dir_structure(root = tmpdir)
 
@@ -9,7 +9,7 @@ test_that("test load_samples from example dir structure", {
   )
   samplesheet <- fragmentomics::parse_samplesheet(example_samplesheet)
 
-  results <- fragmentomics::load_samples(
+  results <- fragmentomics::load_sample(
     caseid = samplesheet$caseid[1],
     sampleid = samplesheet$sampleid[1],
     timepoint = samplesheet$timepoint[1],
@@ -35,7 +35,7 @@ test_that("test load_samples fail with missing peak stats file", {
   file_to_remove <- file.path(fragdir, "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/peakstats/source_1/CTCF/CTCF_peak_stats.tsv")
   file.remove(file_to_remove)
   expect_error(
-    fragmentomics::load_samples(
+    fragmentomics::load_sample(
       caseid = samplesheet$caseid[1],
       sampleid = samplesheet$sampleid[1],
       timepoint = samplesheet$timepoint[1],
@@ -61,7 +61,7 @@ test_that("test load_samples fail with missing peak data file", {
   file_to_remove <- file.path(fragdir, "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/peakstats/source_1/CTCF/CTCF_peak_data.tsv")
   file.remove(file_to_remove)
   expect_error(
-    fragmentomics::load_samples(
+    fragmentomics::load_sample(
       caseid = samplesheet$caseid[1],
       sampleid = samplesheet$sampleid[1],
       timepoint = samplesheet$timepoint[1],
@@ -87,7 +87,7 @@ test_that("test load_samples fail with missing matrix file", {
   file_to_remove <- file.path(fragdir, "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/matrix/source_1/CTCF/CTCF.gz")
   file.remove(file_to_remove)
   expect_error(
-    fragmentomics::load_samples(
+    fragmentomics::load_sample(
       caseid = samplesheet$caseid[1],
       sampleid = samplesheet$sampleid[1],
       timepoint = samplesheet$timepoint[1],
