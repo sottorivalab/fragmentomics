@@ -6,8 +6,29 @@
 \usage{
 target_plot(target, palette = "Set1")
 }
+\arguments{
+\item{target}{A tibble containing target data with columns:
+\code{caseid}, \code{sampleid}, \code{timepoint}, \code{encoded_timepoint}, \code{signal},
+\code{target}, \code{source}, \code{peakfile}, \code{bin}, \code{relative}.}
+
+\item{palette}{A character string specifying the color palette to use.
+Defaults to "Set1" from RColorBrewer.}
+}
+\value{
+A ggplot object visualizing the target data.
+}
 \description{
 This function plots target data for
 a specified target and source sample.
-the color palette to use for the plot.
+}
+\examples{
+\dontrun{
+example_samplesheet <- system.file("extdata",
+                                   "samplesheet.csv",
+                                   package = "fragmentomics")
+samplesheet <- parse_samplesheet(example_samplesheet)
+experiment <- load_experiment(samplesheet, "results")
+ctcf <- load_peaks(experiment |> dplyr::filter(target == "CTCF"), "results")
+target_plot(ctcf)
+}
 }

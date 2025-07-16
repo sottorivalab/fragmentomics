@@ -32,7 +32,8 @@ test_that("test load_samples fail with missing peak stats file", {
   )
 
   samplesheet <- fragmentomics::parse_samplesheet(example_samplesheet)
-  file_to_remove <- file.path(fragdir, "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/peakstats/source_1/CTCF/CTCF_peak_stats.tsv")
+  f <- "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/peakstats/source_1/CTCF"
+  file_to_remove <- file.path(fragdir, f, "CTCF_peak_stats.tsv")
   file.remove(file_to_remove)
   expect_error(
     fragmentomics::load_sample(
@@ -58,7 +59,8 @@ test_that("test load_samples fail with missing peak data file", {
   )
 
   samplesheet <- fragmentomics::parse_samplesheet(example_samplesheet)
-  file_to_remove <- file.path(fragdir, "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/peakstats/source_1/CTCF/CTCF_peak_data.tsv")
+  f <- "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/peakstats/source_1/CTCF"
+  file_to_remove <- file.path(fragdir, f, "CTCF_peak_data.tsv")
   file.remove(file_to_remove)
   expect_error(
     fragmentomics::load_sample(
@@ -84,8 +86,10 @@ test_that("test load_samples fail with missing matrix file", {
   )
 
   samplesheet <- fragmentomics::parse_samplesheet(example_samplesheet)
-  file_to_remove <- file.path(fragdir, "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/matrix/source_1/CTCF/CTCF.gz")
+  f <- "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/matrix/source_1/CTCF"
+  file_to_remove <- file.path(fragdir, f, "CTCF.gz")
   file.remove(file_to_remove)
+
   expect_error(
     fragmentomics::load_sample(
       caseid = samplesheet$caseid[1],

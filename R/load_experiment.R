@@ -20,7 +20,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' example_samplesheet <- system.file("extdata","samplesheet.csv",package = "fragmentomics")
+#' example_samplesheet <- system.file("extdata",
+#'                                    "samplesheet.csv",
+#'                                    package = "fragmentomics")
 #' samplesheet <- parse_samplesheet(example_samplesheet)
 #' experiment <- load_experiment(samplesheet, "results")
 #' }

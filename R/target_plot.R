@@ -3,9 +3,23 @@
 #'
 #' @description This function plots target data for
 #' a specified target and source sample.
-
-#' the color palette to use for the plot.
 #'
+#' @param target A tibble containing target data with columns:
+#' `caseid`, `sampleid`, `timepoint`, `encoded_timepoint`, `signal`,
+#' `target`, `source`, `peakfile`, `bin`, `relative`.
+#' @param palette A character string specifying the color palette to use.
+#' Defaults to "Set1" from RColorBrewer.
+#' @return A ggplot object visualizing the target data.
+#' @examples
+#' \dontrun{
+#' example_samplesheet <- system.file("extdata",
+#'                                    "samplesheet.csv",
+#'                                    package = "fragmentomics")
+#' samplesheet <- parse_samplesheet(example_samplesheet)
+#' experiment <- load_experiment(samplesheet, "results")
+#' ctcf <- load_peaks(experiment |> dplyr::filter(target == "CTCF"), "results")
+#' target_plot(ctcf)
+#' }
 #' @export
 target_plot <- function(target, palette = "Set1") {
   # set colors
