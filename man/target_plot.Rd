@@ -4,19 +4,10 @@
 \alias{target_plot}
 \title{Plot Targets by Sample}
 \usage{
-target_plot(experiment, target, source, palette = "Set1")
-}
-\arguments{
-\item{experiment}{An experiment object containing target data.}
-
-\item{target}{A character string specifying the target to plot.}
-
-\item{source}{A character string specifying the source sample to plot.}
-
-\item{palette}{A character string specifying
-the color palette to use for the plot.}
+target_plot(target, palette = "Set1")
 }
 \description{
 This function plots target data for
 a specified target and source sample.
+the color palette to use for the plot.
 }

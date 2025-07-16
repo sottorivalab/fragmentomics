@@ -21,6 +21,5 @@ parse_peak_data <- function(file) {
       coverage = readr::col_double(),
       relative = readr::col_double(),
       background.mean = readr::col_double()
-    )
-  )
+    ))
 }

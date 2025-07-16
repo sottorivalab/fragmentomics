@@ -19,7 +19,7 @@
 #' @returns A tibble containing the loaded sample data.
 #'
 #' @examples
-#' \donotrun{
+#' \dontrun{
 #' example_samplesheet <- system.file("extdata","samplesheet.csv",package = "fragmentomics")
 #' samplesheet <- parse_samplesheet(example_samplesheet)
 #' experiment <- load_experiment(samplesheet, "results")
@@ -37,6 +37,7 @@ load_experiment <- function(samplesheet,
 
   if (parallelize) {
     # FIXME can be also slurm
+    # FIXME need a try catch
     mirai::daemons(number_of_daemons)
     samples <- samplesheet |> purrr::pmap(
       purrr::in_parallel(
