@@ -25,7 +25,6 @@ load_peaks <- function(experiment,
   }
 
   if (parallelize) {
-
     # FIXME can be also slurm
     # FIXME need a try catch
     mirai::daemons(number_of_daemons)

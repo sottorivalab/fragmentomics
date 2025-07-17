@@ -32,13 +32,13 @@ target_plot <- function(target, palette = "Set1") {
 
   mdata <- target |> dplyr::group_by(caseid)
 
+  # FIXME fix scales I need consistent TEST data
   # x scale
   # x_scale <- scale_x_bins(data[["average"]]$bin,
   #                         data[["stats"]]$central_bin,
   #                         data[["stats"]]$bin_size)
   #
 
-  # FIXME fix scales
   g <- ggplot2::ggplot(mdata, maes) +
     ggplot2::geom_line() +
     ggplot2::facet_wrap(~caseid)

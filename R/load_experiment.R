@@ -39,20 +39,13 @@ load_experiment <- function(samplesheet,
 
   if (parallelize) {
     # FIXME can be also slurm
-    # FIXME need a try catch
     mirai::daemons(number_of_daemons)
-    samples <- samplesheet |> purrr::pmap(
-      purrr::in_parallel(
-        \(caseid, sampleid, timepoint, encoded_timepoint) {
-          fragmentomics::load_sample(caseid, sampleid, timepoint,
-                                     encoded_timepoint, rootpath, subdir)
-        },
-        rootpath = rootpath,
-        subdir = subdir
-      )
-    ) |>
-      dplyr::bind_rows()
-    mirai::daemons(0)
+    tryCatch(
+      samples <- parallel_load_samples(samplesheet, rootpath, subdir),
+      finally = {
+        mirai::daemons(0)
+      }
+    )
     samples
   } else {
     samplesheet |> purrr::pmap(
@@ -63,4 +56,20 @@ load_experiment <- function(samplesheet,
     ) |>
       dplyr::bind_rows()
   }
+}
+
+parallel_load_samples <- function(samplesheet,
+                                  rootpath,
+                                  subdir) {
+  samplesheet |> purrr::pmap(
+    purrr::in_parallel(
+      \(caseid, sampleid, timepoint, encoded_timepoint) {
+        fragmentomics::load_sample(caseid, sampleid, timepoint,
+                                   encoded_timepoint, rootpath, subdir)
+      },
+      rootpath = rootpath,
+      subdir = subdir
+    )
+  ) |>
+    dplyr::bind_rows()
 }
