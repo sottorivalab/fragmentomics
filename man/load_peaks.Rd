@@ -39,3 +39,13 @@ Load peaks
 take in input an experiment data structure and return
 a peaks data structure loading peaks data files
 }
+\examples{
+\dontrun{
+example_samplesheet <- system.file("extdata",
+                                   "samplesheet.csv",
+                                   package = "fragmentomics")
+samplesheet <- parse_samplesheet(example_samplesheet)
+experiment <- load_experiment(samplesheet, "results")
+ctcf <- load_peaks(experiment |> dplyr::filter(target_label == "CTCF"), "results/")
+}
+}

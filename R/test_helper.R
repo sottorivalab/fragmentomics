@@ -51,9 +51,11 @@ build_dir_structure <- function(root = getwd()) {
         mdest <- file.path(matrixdir, mname)
         file.copy(mpath, mdest, overwrite = TRUE)
 
-        # peak stats
+        # peak stats dir
         psdir <- file.path(sourcedir_peakstats, target)
         dir.create(psdir, showWarnings = FALSE, recursive = TRUE)
+
+        # peak stats dir
         sname <- paste(target,"_peak_stats.tsv",sep="")
         spath <- system.file("extdata", sname, package = "fragmentomics")
         sdest <- file.path(psdir, sname)
@@ -61,7 +63,7 @@ build_dir_structure <- function(root = getwd()) {
 
         # peak data
         dname <- paste(target,"_peak_data.tsv",sep="")
-        dpath <- system.file("extdata", sname, package = "fragmentomics")
+        dpath <- system.file("extdata", dname, package = "fragmentomics")
         ddest <- file.path(psdir, dname)
         file.copy(dpath, ddest, overwrite = TRUE)
       })

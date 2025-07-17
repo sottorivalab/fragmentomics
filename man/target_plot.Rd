@@ -7,9 +7,7 @@
 target_plot(target, palette = "Set1")
 }
 \arguments{
-\item{target}{A tibble containing target data with columns:
-\code{caseid}, \code{sampleid}, \code{timepoint}, \code{encoded_timepoint}, \code{signal},
-\code{target}, \code{source}, \code{peakfile}, \code{bin}, \code{relative}.}
+\item{target}{A tibble containing target data}
 
 \item{palette}{A character string specifying the color palette to use.
 Defaults to "Set1" from RColorBrewer.}
@@ -28,7 +26,7 @@ example_samplesheet <- system.file("extdata",
                                    package = "fragmentomics")
 samplesheet <- parse_samplesheet(example_samplesheet)
 experiment <- load_experiment(samplesheet, "results")
-ctcf <- load_peaks(experiment |> dplyr::filter(target == "CTCF"), "results")
+ctcf <- load_peaks(experiment |> dplyr::filter(target_label == "CTCF"), "results")
 target_plot(ctcf)
 }
 }

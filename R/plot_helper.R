@@ -2,6 +2,11 @@
 #' scale_x_bins
 #'
 #' Function to build the x scale
+#'
+#' @param bin_vector A numeric vector representing the bins.
+#' @param central_bin An integer representing the central bin.
+#' @param bin_size An integer representing the size of the bins.
+#'
 #' @return A list with breaks and labels for the x scale.
 scale_x_bins <- function(bin_vector, central_bin, bin_size) {
   bins <- table(ggplot2::cut_number(bin_vector, 8, labels = FALSE))

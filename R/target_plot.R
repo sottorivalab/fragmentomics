@@ -4,9 +4,7 @@
 #' @description This function plots target data for
 #' a specified target and source sample.
 #'
-#' @param target A tibble containing target data with columns:
-#' `caseid`, `sampleid`, `timepoint`, `encoded_timepoint`, `signal`,
-#' `target`, `source`, `peakfile`, `bin`, `relative`.
+#' @param target A tibble containing target data
 #' @param palette A character string specifying the color palette to use.
 #' Defaults to "Set1" from RColorBrewer.
 #' @return A ggplot object visualizing the target data.
@@ -17,7 +15,7 @@
 #'                                    package = "fragmentomics")
 #' samplesheet <- parse_samplesheet(example_samplesheet)
 #' experiment <- load_experiment(samplesheet, "results")
-#' ctcf <- load_peaks(experiment |> dplyr::filter(target == "CTCF"), "results")
+#' ctcf <- load_peaks(experiment |> dplyr::filter(target_label == "CTCF"), "results")
 #' target_plot(ctcf)
 #' }
 #' @export
@@ -33,19 +31,17 @@ target_plot <- function(target, palette = "Set1") {
   mdata <- target |> dplyr::group_by(caseid)
 
   # FIXME fix scales I need consistent TEST data
-  # x scale
-  # x_scale <- scale_x_bins(data[["average"]]$bin,
-  #                         data[["stats"]]$central_bin,
-  #                         data[["stats"]]$bin_size)
-  #
+  x_scale <- scale_x_bins(unique(target$bin),
+                          unique(target$central_bin),
+                          unique(target$bin_size))
 
   g <- ggplot2::ggplot(mdata, maes) +
     ggplot2::geom_line() +
-    ggplot2::facet_wrap(~caseid)
-    # ggplot2::scale_x_continuous(
-    #   "Position relative to referencePoint (bp)",
-    #   breaks = x_scale$breaks,
-    #   labels = x_scale$labels
-    # )
+    ggplot2::facet_wrap(~caseid) +
+    ggplot2::scale_x_continuous(
+      "Position relative to referencePoint (bp)",
+      breaks = x_scale$breaks,
+      labels = x_scale$labels
+    )
   g
 }
