@@ -14,12 +14,16 @@
 #' daemons to use for parallel processing,
 #' defaults to the number of available cores.
 #' @return A tibble containing the loaded peaks data.
+#'
+#'
+#'
 #' @export
 load_peaks <- function(experiment,
                        rootpath,
                        subdir = "fragmentomics/processed",
                        parallelize = TRUE,
                        number_of_daemons = parallel::detectCores()) {
+
   if (!file.exists(rootpath)) {
     stop("Root path does not exist: ", rootpath)
   }
@@ -33,8 +37,8 @@ load_peaks <- function(experiment,
       purrr::pmap(
         purrr::in_parallel(
           \(caseid, sampleid, timepoint,
-            encoded_timepoint, signal,
-            target, source, peakfile) {
+            encoded_timepoint, signal_label,
+            target_label, source_label, peakfile) {
             # iterate in experiment rows
             fragmentomics::parse_peak_data(peakfile) |>
               dplyr::mutate(
@@ -42,9 +46,9 @@ load_peaks <- function(experiment,
                 sampleid = sampleid,
                 timepoint = timepoint,
                 encoded_timepoint = encoded_timepoint,
-                signal = signal,
-                target = target,
-                source = source,
+                signal_label = signal_label,
+                target_label = target_label,
+                source_label = source_label,
                 .before = 1
               )
           }
@@ -57,8 +61,8 @@ load_peaks <- function(experiment,
     experiment |>
       dplyr::select(caseid:peakfile) |>
       purrr::pmap(function(caseid, sampleid, timepoint,
-                           encoded_timepoint, signal,
-                           target, source, peakfile) {
+                           encoded_timepoint, signal_label,
+                           target_label, source_label, peakfile) {
         # iterate in experiment rows
         fragmentomics::parse_peak_data(peakfile) |>
           dplyr::mutate(
@@ -66,9 +70,9 @@ load_peaks <- function(experiment,
             sampleid = sampleid,
             timepoint = timepoint,
             encoded_timepoint = encoded_timepoint,
-            signal = signal,
-            target = target,
-            source = source,
+            signal_label = signal_label,
+            target_label = target_label,
+            source_label = source_label,
             .before = 1
           )
       }) |>

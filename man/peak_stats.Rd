@@ -50,7 +50,7 @@ Calculate background mean using the limits of the distribution.
 Aka the extreme parts of the peak that will represent the background
 }
 \examples{
-file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+file <- system.file("extdata", "CTCF_matrix.gz", package = "fragmentomics")
 matrix_data <- parse_compute_matrix(file)
 peak_data <- peak_stats(matrix_data)
 

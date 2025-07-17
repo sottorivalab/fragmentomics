@@ -9,7 +9,7 @@ test_that("peakPlot works", {
   # Check if the plot has the expected title
   expect_equal(
     plot$labels$title,
-    "Composite coverage: CTCF on TEST_SAMPLE"
+    "Composite coverage: CTCF_matrix on TEST_SAMPLE"
   )
 })
 

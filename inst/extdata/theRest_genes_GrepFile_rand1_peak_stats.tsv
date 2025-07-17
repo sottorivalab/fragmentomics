@@ -1,2 +1,2 @@
 signal_label	target_label	source_label	integration	background_mean	background_left_limit	background_right_limit	central_bin	bin_size	reference_point_coverage	reference_point_relative	central_coverage	central_coverage_bin_min	central_coverage_bin_max	average_coverage	average_coverage_bin_min	average_coverage_bin_max	peak_length	peak_relative
-MAYA_119_BL	ELK4	single_region_files	0.2066	1.1433265588170551	50	750	400	10	0.8538084541556055	0.7964226599881709	0.849345080078182	397	403	0.9450581285388978	300	500	0.28951810466144967	0.20357734001182914
+MAYA_119_BL	theRest_genes_GrepFile_rand1	random_dataset	0.1057	1.1709423592085295	50	750	400	10	1.1193138500635325	0.967776585920691	1.1349537121074604	397	403	1.125804016764968	300	500	0.05162850914499706	0.032223414079308954

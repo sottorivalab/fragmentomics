@@ -18,7 +18,7 @@ parse_peak_data <- function(file) {
   mcols <- readr::cols(bin = readr::col_integer(),
                        coverage = readr::col_double(),
                        relative = readr::col_double(),
-                       background.mean = readr::col_double())
+                       mean = readr::col_double())
 
   readr::read_tsv(file, show_col_types = FALSE, col_types = mcols)
 }

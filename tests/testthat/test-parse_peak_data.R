@@ -12,7 +12,7 @@ test_that("parse_peak_data works", {
       c("bin",
         "coverage",
         "relative",
-        "background.mean"
+        "mean"
       ) %in% colnames(peak_data)
     )
   )

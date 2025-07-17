@@ -20,7 +20,7 @@ build_dir_structure <- function(root = getwd()) {
   targets <- list(
     source_1 = c("CTCF","ELK4"),
     house_keeping_dataset = c("GeneHancer_housekeeping"),
-    random_dataset = c("rand1", "rand2")
+    random_dataset = c("theRest_genes_GrepFile_rand1", "theRest_genes_GrepFile_rand2")
   )
 
   samples |> purrr::pmap(function(caseid,
@@ -46,7 +46,7 @@ build_dir_structure <- function(root = getwd()) {
         # matrix files
         matrixdir <- file.path(sourcedir_matrix, target)
         dir.create(matrixdir, showWarnings = FALSE, recursive = TRUE)
-        mname <- paste(target,".gz",sep="")
+        mname <- paste(target,"_matrix.gz",sep="")
         mpath <- system.file("extdata", mname, package = "fragmentomics")
         mdest <- file.path(matrixdir, mname)
         file.copy(mpath, mdest, overwrite = TRUE)

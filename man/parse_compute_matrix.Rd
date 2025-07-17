@@ -22,6 +22,6 @@ This function parse output from deeptools computeMatrix
 https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html
 }
 \examples{
-file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+file <- system.file("extdata", "CTCF_matrix.gz", package = "fragmentomics")
 matrix_data <- parse_compute_matrix(file)
 }

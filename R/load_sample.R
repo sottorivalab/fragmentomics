@@ -74,7 +74,7 @@ load_sample <- function(
           dplyr::mutate(
             peakfile = peak_data_file,
             matrixfile = matrix_file_name,
-            .after = "source"
+            .after = "source_label"
           )
       })
     )

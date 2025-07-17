@@ -23,7 +23,7 @@ A ggplot object.
 This function generates a ggplot plot for the given data.
 }
 \examples{
-file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+file <- system.file("extdata", "CTCF_matrix.gz", package = "fragmentomics")
 matrix_data <- parse_compute_matrix(file)
 peak_data <- peak_stats(matrix_data)
 peak_plot(peak_data)
