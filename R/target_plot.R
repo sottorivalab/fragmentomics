@@ -24,6 +24,7 @@
 target_plot <- function(target, palette = "Set1") {
   # set colors
   palette <- RColorBrewer::brewer.pal(7, palette)
+
   maes <- ggplot2::aes(x = bin,
                        y = relative,
                        group = timepoint,
@@ -31,9 +32,20 @@ target_plot <- function(target, palette = "Set1") {
 
   mdata <- target |> dplyr::group_by(caseid)
 
+  # x scale
+  # x_scale <- scale_x_bins(data[["average"]]$bin,
+  #                         data[["stats"]]$central_bin,
+  #                         data[["stats"]]$bin_size)
+  #
+
   # FIXME fix scales
   g <- ggplot2::ggplot(mdata, maes) +
     ggplot2::geom_line() +
     ggplot2::facet_wrap(~caseid)
+    # ggplot2::scale_x_continuous(
+    #   "Position relative to referencePoint (bp)",
+    #   breaks = x_scale$breaks,
+    #   labels = x_scale$labels
+    # )
   g
 }

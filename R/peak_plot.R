@@ -60,7 +60,9 @@ normalized_plot <- function(data, palette) {
   )
 
   # x scale
-  x_scale <- scale_x_bins(data)
+  x_scale <- scale_x_bins(data[["average"]]$bin,
+                          data[["stats"]]$central_bin,
+                          data[["stats"]]$bin_size)
 
   # plot relative signal
   g <- ggplot2::ggplot() +
@@ -131,7 +133,9 @@ raw_plot <- function(data, palette) {
   label_pos <- -(max(data[["average"]]$bin) * .1)
 
   # x scale
-  x_scale <- scale_x_bins(data)
+  x_scale <- scale_x_bins(data[["average"]]$bin,
+                          data[["stats"]]$central_bin,
+                          data[["stats"]]$bin_size)
 
 
   # calculate space for geom_rect on top as max + 10%

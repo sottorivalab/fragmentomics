@@ -1,16 +1,16 @@
 #'
 #' scale_x_bins
 #'
-#' Function to build the x scale based on nother of bins
-#' @param data A list containing the average data and stats.
+#' Function to build the x scale
 #' @return A list with breaks and labels for the x scale.
-scale_x_bins <- function(data) {
-  bins <- table(ggplot2::cut_number(data[["average"]]$bin, 8, labels = FALSE))
+scale_x_bins <- function(bin_vector, central_bin, bin_size) {
+  bins <- table(ggplot2::cut_number(bin_vector, 8, labels = FALSE))
   breaks <- as.numeric(c(0, cumsum(bins)))
   # the central referencePoint
-  central_bin <- data[["stats"]]$central_bin
+  # central_bin <- data[["stats"]]$central_bin
   labels <- lapply(breaks, function(br) {
-    (br - central_bin) * data[["stats"]]$bin_size
+    # (br - central_bin) * data[["stats"]]$bin_size
+    (br - central_bin) * bin_size
   })
   labels <- lapply(labels, label_basepairs)
   list(

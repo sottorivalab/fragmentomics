@@ -4,14 +4,11 @@
 \alias{scale_x_bins}
 \title{scale_x_bins}
 \usage{
-scale_x_bins(data)
-}
-\arguments{
-\item{data}{A list containing the average data and stats.}
+scale_x_bins(bin_vector, central_bin, bin_size)
 }
 \value{
 A list with breaks and labels for the x scale.
 }
 \description{
-Function to build the x scale based on nother of bins
+Function to build the x scale
 }
