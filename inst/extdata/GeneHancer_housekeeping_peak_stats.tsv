@@ -1,0 +1,2 @@
+signal	target	source	integration	background.mean	referencePoint.bin	referencePoint.coverage	referencePoint.relative	central.coverage	central.coverage.bin.min	central.coverage.bin.max	background.left.limit	background.right.limit	average.coverage	average.coverage.bin.min	average.coverage.bin.max	peak.length	peak.relative.length
+VALE_6_PD	GeneHancer_housekeeping	house_keeping_dataset	0.1404	0.29544757187395554	400	0.14650069156293222	0.4958601982534913	0.1527682276229994	397	403	50	750	0.22836742979432023	300	500	0.14894688031102332	0.5041398017465086

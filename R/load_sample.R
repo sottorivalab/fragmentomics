@@ -57,7 +57,7 @@ load_sample <- function(
         matrix_file_name <- file.path(matrix_path,
                                       paste(basename(target_dir),
                                             ".gz", sep = ""))
-
+        # FIXME double names is a mess
         if (!file.exists(matrix_file_name)) {
           matrix_file_name <- file.path(matrix_path,
                                         paste(basename(target_dir),

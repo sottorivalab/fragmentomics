@@ -3,7 +3,7 @@
 \name{build_dir_structure}
 \alias{build_dir_structure}
 \title{Helper function to build a directory structure for testing
-you can load in env source(\if{html}{\out{<file>}})}
+it use files in inst/extdata}
 \usage{
 build_dir_structure(root = getwd())
 }
@@ -12,5 +12,5 @@ build_dir_structure(root = getwd())
 }
 \description{
 Helper function to build a directory structure for testing
-you can load in env source(\if{html}{\out{<file>}})
+it use files in inst/extdata
 }
