@@ -21,7 +21,8 @@
 #'                                    package = "fragmentomics")
 #' samplesheet <- parse_samplesheet(example_samplesheet)
 #' experiment <- load_experiment(samplesheet, "results")
-#' ctcf <- load_peaks(experiment |> dplyr::filter(target_label == "CTCF"), "results/")
+#' ctcf <- experiment |> dplyr::filter(target_label == "CTCF")
+#' ctcf_peaks <- load_peaks(ctcf, "results/")
 #' }
 #' @export
 load_peaks <- function(experiment,
@@ -46,21 +47,12 @@ load_peaks <- function(experiment,
         purrr::in_parallel(
           \(caseid, sampleid, timepoint,
             encoded_timepoint, signal_label,
-            target_label, source_label, peakfile,
-            bin_size, central_bin) {
-
-            fragmentomics::load_peak_data(caseid,
-                           sampleid,
-                           timepoint,
-                           encoded_timepoint,
-                           signal_label,
-                           target_label,
-                           source_label,
-                           bin_size,
-                           central_bin,
-                           peakfile)
-
-          })) |>
+            target_label, source_label,
+            peakfile, bin_size, central_bin) {
+        fragmentomics::load_peak_data(caseid, sampleid,
+                                      timepoint, encoded_timepoint,
+                                      signal_label, target_label, source_label,
+                                      bin_size, central_bin, peakfile)})) |>
       dplyr::bind_rows()
     mirai::daemons(0)
     res
@@ -70,16 +62,9 @@ load_peaks <- function(experiment,
                            encoded_timepoint, signal_label,
                            target_label, source_label, peakfile,
                            bin_size, central_bin) {
-        fragmentomics::load_peak_data(caseid,
-                       sampleid,
-                       timepoint,
-                       encoded_timepoint,
-                       signal_label,
-                       target_label,
-                       source_label,
-                       bin_size,
-                       central_bin,
-                       peakfile)
+        fragmentomics::load_peak_data(caseid, sampleid, timepoint, encoded_timepoint,
+                                      signal_label, target_label, source_label,
+                                      bin_size, central_bin, peakfile)
       }) |>
       dplyr::bind_rows()
   }

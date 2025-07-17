@@ -9,7 +9,8 @@ test_that("target_plot return a ggplot", {
   )
   samplesheet <- parse_samplesheet(example_samplesheet)
   experiment <- load_experiment(samplesheet, fragdir)
-  ctcf <- load_peaks(experiment |> dplyr::filter(target_label == "CTCF"), fragdir)
+  ctcf <- load_peaks(experiment |> dplyr::filter(target_label == "CTCF"),
+                     fragdir)
 
   g <- target_plot(ctcf)
   expect_true(ggplot2::is_ggplot(g))

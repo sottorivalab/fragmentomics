@@ -18,9 +18,10 @@ build_dir_structure <- function(root = getwd()) {
   samples <- fragmentomics::parse_samplesheet(samplesheet)
 
   targets <- list(
-    source_1 = c("CTCF","ELK4"),
+    source_1 = c("CTCF", "ELK4"),
     house_keeping_dataset = c("GeneHancer_housekeeping"),
-    random_dataset = c("theRest_genes_GrepFile_rand1", "theRest_genes_GrepFile_rand2")
+    random_dataset = c("theRest_genes_GrepFile_rand1",
+                       "theRest_genes_GrepFile_rand2")
   )
 
   samples |> purrr::pmap(function(caseid,
@@ -30,7 +31,7 @@ build_dir_structure <- function(root = getwd()) {
 
     sampledir <- file.path(fragdir, caseid, sampleid)
     dir.create(sampledir, showWarnings = FALSE, recursive = TRUE)
-    pdir <- file.path(sampledir, "fragmentomics","processed")
+    pdir <- file.path(sampledir, "fragmentomics", "processed")
     dir.create(pdir, showWarnings = FALSE, recursive = TRUE)
     mdir <- file.path(pdir, "matrix")
     dir.create(mdir, showWarnings = FALSE, recursive = TRUE)
@@ -46,7 +47,7 @@ build_dir_structure <- function(root = getwd()) {
         # matrix files
         matrixdir <- file.path(sourcedir_matrix, target)
         dir.create(matrixdir, showWarnings = FALSE, recursive = TRUE)
-        mname <- paste(target,"_matrix.gz",sep="")
+        mname <- paste(target, "_matrix.gz", sep = "")
         mpath <- system.file("extdata", mname, package = "fragmentomics")
         mdest <- file.path(matrixdir, mname)
         file.copy(mpath, mdest, overwrite = TRUE)
@@ -56,13 +57,13 @@ build_dir_structure <- function(root = getwd()) {
         dir.create(psdir, showWarnings = FALSE, recursive = TRUE)
 
         # peak stats dir
-        sname <- paste(target,"_peak_stats.tsv",sep="")
+        sname <- paste(target, "_peak_stats.tsv", sep = "")
         spath <- system.file("extdata", sname, package = "fragmentomics")
         sdest <- file.path(psdir, sname)
         file.copy(spath, sdest, overwrite = TRUE)
 
         # peak data
-        dname <- paste(target,"_peak_data.tsv",sep="")
+        dname <- paste(target, "_peak_data.tsv", sep = "")
         dpath <- system.file("extdata", dname, package = "fragmentomics")
         ddest <- file.path(psdir, dname)
         file.copy(dpath, ddest, overwrite = TRUE)
@@ -72,4 +73,3 @@ build_dir_structure <- function(root = getwd()) {
 
   fragdir
 }
-

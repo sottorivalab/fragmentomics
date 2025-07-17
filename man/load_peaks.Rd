@@ -46,6 +46,7 @@ example_samplesheet <- system.file("extdata",
                                    package = "fragmentomics")
 samplesheet <- parse_samplesheet(example_samplesheet)
 experiment <- load_experiment(samplesheet, "results")
-ctcf <- load_peaks(experiment |> dplyr::filter(target_label == "CTCF"), "results/")
+ctcf <- experiment |> dplyr::filter(target_label == "CTCF")
+ctcf_peaks <- load_peaks(ctcf, "results/")
 }
 }

@@ -12,9 +12,7 @@ scale_x_bins <- function(bin_vector, central_bin, bin_size) {
   bins <- table(ggplot2::cut_number(bin_vector, 8, labels = FALSE))
   breaks <- as.numeric(c(0, cumsum(bins)))
   # the central referencePoint
-  # central_bin <- data[["stats"]]$central_bin
   labels <- lapply(breaks, function(br) {
-    # (br - central_bin) * data[["stats"]]$bin_size
     (br - central_bin) * bin_size
   })
   labels <- lapply(labels, label_basepairs)
