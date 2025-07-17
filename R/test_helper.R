@@ -19,7 +19,8 @@ build_dir_structure <- function(root = getwd()) {
 
   targets <- list(
     source_1 = c("CTCF","ELK4"),
-    house_keeping_dataset = c("GeneHancer_housekeeping")
+    house_keeping_dataset = c("GeneHancer_housekeeping"),
+    random_dataset = c("rand1", "rand2")
   )
 
   samples |> purrr::pmap(function(caseid,

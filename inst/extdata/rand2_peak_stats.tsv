@@ -1,0 +1,2 @@
+signal	target	source	integration	background.mean	referencePoint.bin	referencePoint.coverage	referencePoint.relative	central.coverage	central.coverage.bin.min	central.coverage.bin.max	background.left.limit	background.right.limit	average.coverage	average.coverage.bin.min	average.coverage.bin.max	peak.length	peak.relative.length
+VALE_6_PD	theRest_genes_GrepFile_rand2	random_dataset	0.0299	0.2905596768237486	400	0.2547165013984236	0.8766409165334142	0.2541789255748066	397	403	50	750	0.2913835834906287	300	500	0.035843175425325	0.12335908346658575
