@@ -58,6 +58,20 @@ load_experiment <- function(samplesheet,
   }
 }
 
+
+#'
+#' Load samples in parallel
+#' This function is intended to load samples in parallel
+#'
+#' @param samplesheet A tibble containing the samplesheet data.
+#' @param rootpath A character string specifying the
+#' root path where the sample data is located.
+#' @param subdir A character string specifying the
+#' subdirectory within the root path where
+#' the sample data is located, defaults
+#' to "fragmentomics/processed/matrix".
+#'
+#' @returns A tibble containing the loaded sample data.
 parallel_load_samples <- function(samplesheet,
                                   rootpath,
                                   subdir) {
