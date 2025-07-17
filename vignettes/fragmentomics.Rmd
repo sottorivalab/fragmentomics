@@ -27,7 +27,7 @@ library(fragmentomics)
 Simple example using data provided in the package. 
 
 ```{r example_file}
-example_file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+example_file <- system.file("extdata", "CTCF_matrix.gz", package = "fragmentomics")
 ```
 
 Parse compute matrix

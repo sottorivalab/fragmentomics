@@ -87,7 +87,7 @@ test_that("test load_samples fail with missing matrix file", {
 
   samplesheet <- fragmentomics::parse_samplesheet(example_samplesheet)
   f <- "SAMPLE_1/SAMPLE_1_BL/fragmentomics/processed/matrix/source_1/CTCF"
-  file_to_remove <- file.path(fragdir, f, "CTCF.gz")
+  file_to_remove <- file.path(fragdir, f, "CTCF_matrix.gz")
   file.remove(file_to_remove)
 
   expect_error(

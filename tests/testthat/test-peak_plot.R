@@ -1,5 +1,5 @@
 test_that("peakPlot works", {
-  test_file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+  test_file <- system.file("extdata", "CTCF_matrix.gz", package = "fragmentomics")
   # Compute peak stats
   stats <- peak_stats(parse_compute_matrix(test_file))
   # Test peak plot function
@@ -14,7 +14,7 @@ test_that("peakPlot works", {
 })
 
 test_that("peakPlot normalized works", {
-  test_file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+  test_file <- system.file("extdata", "CTCF_matrix.gz", package = "fragmentomics")
   # Compute peak stats
   stats <- peak_stats(parse_compute_matrix(test_file))
   # Test peak plot function

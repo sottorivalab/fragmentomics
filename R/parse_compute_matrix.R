@@ -10,7 +10,7 @@
 #'  3. columns 30+ are bins with values
 #'
 #' @examples
-#' file <- system.file("extdata", "CTCF.gz", package = "fragmentomics")
+#' file <- system.file("extdata", "CTCF_matrix.gz", package = "fragmentomics")
 #' matrix_data <- parse_compute_matrix(file)
 #' @export
 parse_compute_matrix <- function(file) {
