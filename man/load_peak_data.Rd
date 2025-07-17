@@ -33,11 +33,13 @@ load_peak_data(
 
 \item{source_label}{A character string representing the source label.}
 
-\item{bin_size}{An integer representing the size of the bins used in the peak data.}
+\item{bin_size}{An integer representing the size of
+the bins used in the peak data.}
 
 \item{central_bin}{An integer representing the central bin of the peak data.}
 
-\item{peakfile}{A character string representing the path to the peak data file.}
+\item{peakfile}{A character string representing
+the path to the peak data file.}
 }
 \value{
 A tibble containing the parsed peak data with additional metadata.

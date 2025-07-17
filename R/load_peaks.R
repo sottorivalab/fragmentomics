@@ -37,24 +37,15 @@ load_peaks <- function(experiment,
 
   mdata <- experiment |> dplyr::select(caseid:peakfile, bin_size, central_bin)
 
-
   if (parallelize) {
     # FIXME can be also slurm
-    # FIXME need a try catch
     mirai::daemons(number_of_daemons)
-    res <- mdata |>
-      purrr::pmap(
-        purrr::in_parallel(
-          \(caseid, sampleid, timepoint,
-            encoded_timepoint, signal_label,
-            target_label, source_label,
-            peakfile, bin_size, central_bin) {
-        fragmentomics::load_peak_data(caseid, sampleid,
-                                      timepoint, encoded_timepoint,
-                                      signal_label, target_label, source_label,
-                                      bin_size, central_bin, peakfile)})) |>
-      dplyr::bind_rows()
-    mirai::daemons(0)
+    tryCatch(
+      res <- parallel_load_peaks(mdata),
+      finally = {
+        mirai::daemons(0)
+      }
+    )
     res
   } else {
     mdata |>
@@ -62,7 +53,8 @@ load_peaks <- function(experiment,
                            encoded_timepoint, signal_label,
                            target_label, source_label, peakfile,
                            bin_size, central_bin) {
-        fragmentomics::load_peak_data(caseid, sampleid, timepoint, encoded_timepoint,
+        fragmentomics::load_peak_data(caseid, sampleid,
+                                      timepoint, encoded_timepoint,
                                       signal_label, target_label, source_label,
                                       bin_size, central_bin, peakfile)
       }) |>
@@ -70,7 +62,27 @@ load_peaks <- function(experiment,
   }
 }
 
-
+#' parallel_load_peaks
+#' Load peaks data in parallel.
+#' @examples#'
+#' @param mdata A tibble containing the metadata for the peaks data.
+#' @return A tibble containing the loaded peaks data.
+#' @export
+parallel_load_peaks <- function(mdata) {
+  mdata |>
+    purrr::pmap(purrr::in_parallel(
+      \(caseid, sampleid, timepoint,
+        encoded_timepoint, signal_label,
+        target_label, source_label,
+        peakfile, bin_size, central_bin) {
+        fragmentomics::load_peak_data(caseid, sampleid,
+                                      timepoint, encoded_timepoint,
+                                      signal_label, target_label, source_label,
+                                      bin_size, central_bin, peakfile)
+      }
+    )) |>
+    dplyr::bind_rows()
+}
 
 
 #' load_peak_data
@@ -83,9 +95,11 @@ load_peaks <- function(experiment,
 #' @param signal_label A character string representing the signal label.
 #' @param target_label A character string representing the target label.
 #' @param source_label A character string representing the source label.
-#' @param bin_size An integer representing the size of the bins used in the peak data.
+#' @param bin_size An integer representing the size of
+#' the bins used in the peak data.
 #' @param central_bin An integer representing the central bin of the peak data.
-#' @param peakfile A character string representing the path to the peak data file.
+#' @param peakfile A character string representing
+#' the path to the peak data file.
 #'
 #' @return A tibble containing the parsed peak data with additional metadata.
 #' @export
