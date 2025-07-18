@@ -1,10 +1,10 @@
-#' @title Plot Housekeeping Genes
+#' Plot Housekeeping Genes
 #'
 #' This function generates a ggplot plot for housekeeping genes.
 #'
 #' @param housekeeping A tibble containing the housekeeping gene peak data.
 #' @param random A tibble containing the random datasets peak data.
-#'
+#' @param relative A boolean indicating whether to plot relative coverage
 housekeeping_plot <- function(housekeeping, random, relative = TRUE) {
   plot_title <- paste(
     unique(housekeeping$signal_label),
@@ -40,6 +40,9 @@ housekeeping_plot <- function(housekeeping, random, relative = TRUE) {
     ggplot2::theme(legend.position = "bottom")
 }
 
+#' Plot Relative Housekeeping Genes
+#' @param housekeeping A tibble containing the housekeeping gene peak data.
+#' @param random A tibble containing the random datasets peak data.
 housekeeping_plot_relative <- function(housekeeping, random) {
   g <- ggplot2::ggplot() +
     ggplot2::geom_line(data = random,
@@ -48,10 +51,13 @@ housekeeping_plot_relative <- function(housekeeping, random) {
     ggplot2::geom_line(data = housekeeping,
                        ggplot2::aes(x = bin, y = relative),
                        color="red", show.legend = FALSE) +
-    ylab("relative composite coverage")
+    ggplot2::ylab("relative composite coverage")
   g
 }
 
+#' Plot Coverage Housekeeping Genes
+#' @param housekeeping A tibble containing the housekeeping gene peak data.
+#' @param random A tibble containing the random datasets peak data.
 housekeeping_plot_coverage <- function(housekeeping, random) {
   g <- ggplot2::ggplot() +
     ggplot2::geom_line(data = random,
@@ -60,6 +66,6 @@ housekeeping_plot_coverage <- function(housekeeping, random) {
     ggplot2::geom_line(data = housekeeping,
                        ggplot2::aes(x = bin, y = coverage),
                        color="red", show.legend = FALSE) +
-    ylab("composite coverage")
+    ggplot2::ylab("composite coverage")
   g
 }
