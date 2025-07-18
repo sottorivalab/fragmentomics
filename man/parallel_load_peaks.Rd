@@ -17,3 +17,6 @@ A tibble containing the loaded peaks data.
 parallel_load_peaks
 Load peaks data in parallel.
 }
+\examples{
+#'
+}
