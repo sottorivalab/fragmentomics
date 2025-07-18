@@ -31,7 +31,6 @@ target_plot <- function(target, palette = "Set1") {
 
   mdata <- target |> dplyr::group_by(caseid)
 
-  # FIXME fix scales I need consistent TEST data
   x_scale <- scale_x_bins(unique(target$bin),
                           unique(target$central_bin),
                           unique(target$bin_size))
