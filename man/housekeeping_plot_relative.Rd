@@ -4,12 +4,12 @@
 \alias{housekeeping_plot_relative}
 \title{Plot Relative Housekeeping Genes}
 \usage{
-housekeeping_plot_relative(housekeeping, random)
+housekeeping_plot_relative(housekeeping_data, random_data)
 }
 \arguments{
-\item{housekeeping}{A tibble containing the housekeeping gene peak data.}
+\item{housekeeping_data}{A tibble containing the housekeeping_data gene peak data.}
 
-\item{random}{A tibble containing the random datasets peak data.}
+\item{random_data}{A tibble containing the random_data datasets peak data.}
 }
 \description{
 Plot Relative Housekeeping Genes

@@ -4,12 +4,12 @@
 \alias{housekeeping_plot_coverage}
 \title{Plot Coverage Housekeeping Genes}
 \usage{
-housekeeping_plot_coverage(housekeeping, random)
+housekeeping_plot_coverage(housekeeping_data, random_data)
 }
 \arguments{
-\item{housekeeping}{A tibble containing the housekeeping gene peak data.}
+\item{housekeeping_data}{A tibble containing the housekeeping_data gene peak data.}
 
-\item{random}{A tibble containing the random datasets peak data.}
+\item{random_data}{A tibble containing the random_data datasets peak data.}
 }
 \description{
 Plot Coverage Housekeeping Genes

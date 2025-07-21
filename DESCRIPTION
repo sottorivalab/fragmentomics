@@ -20,6 +20,7 @@ Imports:
   tibble,
   dplyr,
   ggplot2  (>= 3.5.2),
+  ggrepel,
   readr,
   jsonlite,
   tidyr,

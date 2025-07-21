@@ -20,6 +20,7 @@ utils::globalVariables(
     "signal_label",
     "targetid",
     "peakfile",
-    "central_bin"
+    "central_bin",
+    "peak_length"
   )
 )
