@@ -5,7 +5,21 @@
 #' @param housekeeping A tibble containing the housekeeping gene peak data.
 #' @param random A tibble containing the random datasets peak data.
 #' @param relative A boolean indicating whether to plot relative coverage
-housekeeping_plot <- function(housekeeping, random, relative = TRUE) {
+#' @examples
+#' \dontrun{
+#' example_samplesheet <- system.file("extdata",
+#'                                    "samplesheet.csv",
+#'                                    package = "fragmentomics")
+#' samplesheet <- parse_samplesheet(example_samplesheet)
+#' experiment <- load_experiment(samplesheet, "results")
+#' housekeeping <- experiment |> dplyr::filter(target_label == "GeneHancer_housekeeping")
+#' housekeeping_data <- load_peaks(housekeeping, "results")
+#' random <- experiment |> dplyr::filter(source_label == "random_dataset")
+#' random_data <- load_peaks(random, "results")
+#' housekeeping_plot(housekeeping_data, random_data)
+#' }
+#' @export
+housekeeping_plot <- function(housekeeping, random, relative = FALSE) {
   plot_title <- paste(
     unique(housekeeping$signal_label),
     "-",

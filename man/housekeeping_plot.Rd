@@ -16,3 +16,17 @@ housekeeping_plot(housekeeping, random, relative = TRUE)
 \description{
 This function generates a ggplot plot for housekeeping genes.
 }
+\examples{
+\dontrun{
+example_samplesheet <- system.file("extdata",
+                                   "samplesheet.csv",
+                                   package = "fragmentomics")
+samplesheet <- parse_samplesheet(example_samplesheet)
+experiment <- load_experiment(samplesheet, "results")
+housekeeping <- experiment |> dplyr::filter(target_label == "GeneHancer_housekeeping")
+housekeeping_data <- load_peaks(housekeeping, "results")
+random <- experiment |> dplyr::filter(source_label == "random_dataset")
+random_data <- load_peaks(random, "results")
+housekeeping_plot(housekeeping_data, random_data)
+}
+}
