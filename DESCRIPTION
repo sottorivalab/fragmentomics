@@ -29,7 +29,8 @@ Imports:
   scales,
   purrr (>= 1.1.0),
   mirai (>= 2.4.0),
-  parallel
+  parallel,
+  ComplexHeatmap
 Suggests: 
     knitr,
     rmarkdown,
