@@ -30,7 +30,7 @@ test_that("parse_compute_matrix from example file", {
   # Check if NaN values are replaced with NA
   expect_true(all(is.na(result$bin_1[is.nan(result$bin_1)])))
   # Check if the data frame has the expected number of rows
-  expect_equal(nrow(result), 999)
+  expect_equal(nrow(result), 9950)
   expect_equal(ncol(result), 24 + 6 + 800)
 })
 
