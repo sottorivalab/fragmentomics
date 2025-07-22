@@ -82,7 +82,5 @@ matrix_plot <- function(matrix_data,
                                width  = ggplot2::unit(3,"cm"),
                                heatmap_legend_param = legend_param)
 
-  ComplexHeatmap::draw(h)
-
   h
 }

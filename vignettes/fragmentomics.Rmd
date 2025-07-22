@@ -59,9 +59,9 @@ Plot relative signal:
 peak_plot(peak_data, normalized = TRUE)
 ```
 
-Plot matrix_data
+Plot matrix data:
 
-```{r matrix_plot}
+```{r matrix_plot, fig.width=3, fig.height=10}
 matrix_plot(matrix_data)
 ```
 
