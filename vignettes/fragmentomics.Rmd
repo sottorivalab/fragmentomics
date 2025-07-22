@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
 )
 ```
 
+This package analyze data from fragmentomics nextflow pipeline.
+
+
 ## SETUP
 
 ```{r setup}
@@ -55,3 +58,12 @@ Plot relative signal:
 ```{r peak_plot_relative, fig.width=10, fig.height=10}
 peak_plot(peak_data, normalized = TRUE)
 ```
+
+Plot matrix_data
+
+```{r matrix_plot}
+matrix_plot(matrix_data)
+```
+
+
+

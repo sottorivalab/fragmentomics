@@ -6,7 +6,7 @@
 #' @return A ComplexHeatmap object representing the plotted matrix.
 #' @importFrom stats quantile
 #' @export
-plot_matrix <- function(matrix_data,
+matrix_plot <- function(matrix_data,
                         palette = "RdYlBu") {
   # stats
   peak_data <- peak_stats(matrix_data)
