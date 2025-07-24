@@ -15,5 +15,6 @@ housekeeping_zscore(housekeeping, random)
 A tibble containing the z-scores for the housekeeping genes.
 }
 \description{
-This function calculates the z-score for housekeeping genes compared to random datasets.
+This function calculates the z-score for housekeeping
+genes compared to random datasets.
 }

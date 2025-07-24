@@ -7,7 +7,8 @@
 housekeeping_plot_coverage(housekeeping_data, random_data)
 }
 \arguments{
-\item{housekeeping_data}{A tibble containing the housekeeping_data gene peak data.}
+\item{housekeeping_data}{A tibble containing the
+housekeeping_data gene peak data.}
 
 \item{random_data}{A tibble containing the random_data datasets peak data.}
 }

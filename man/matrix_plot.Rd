@@ -9,7 +9,8 @@ matrix_plot(matrix_data, palette = "RdYlBu")
 \arguments{
 \item{matrix_data}{A data frame containing the matrix data to be plotted.}
 
-\item{palette}{A character string representing the color palette to be used for the plot.}
+\item{palette}{A character string representing the color palette
+to be used for the plot.}
 }
 \value{
 A ComplexHeatmap object representing the plotted matrix.

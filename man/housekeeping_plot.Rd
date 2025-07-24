@@ -7,7 +7,8 @@
 housekeeping_plot(housekeeping_data, random_data, relative = FALSE)
 }
 \arguments{
-\item{housekeeping_data}{A tibble containing the housekeeping_data gene peak data.}
+\item{housekeeping_data}{A tibble containing
+the housekeeping_data gene peak data.}
 
 \item{random_data}{A tibble containing the random_data datasets peak data.}
 
@@ -23,8 +24,9 @@ example_samplesheet <- system.file("extdata",
                                    package = "fragmentomics")
 samplesheet <- parse_samplesheet(example_samplesheet)
 experiment <- load_experiment(samplesheet, "results")
-housekeeping <- experiment |> dplyr::filter(target_label == "GeneHancer_housekeeping",
-                                            sampleid == "SAMPLE_1_BL")
+housekeeping <- experiment |>
+  dplyr::filter(target_label == "GeneHancer_housekeeping",
+                sampleid == "SAMPLE_1_BL")
 housekeeping_data <- load_peaks(housekeeping, "results")
 random <- experiment |> dplyr::filter(source_label == "random_dataset",
                                       sampleid == "SAMPLE_1_BL")

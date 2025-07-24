@@ -11,12 +11,14 @@ housekeeping_zscore_plot(housekeeping, random, bins = NULL)
 
 \item{random}{A tibble containing the random datasets stats data.}
 
-\item{bins}{An optional integer specifying the number of bins for the histogram. If NULL, breaks are calculated using Sturge's method.#' @param bins An optional integer specifying the number of bins for the histogram.
+\item{bins}{An optional integer specifying
+the number of bins for the histogram.
 If NULL, breaks are calculated using Sturge's method.}
 }
 \value{
 A ggplot object for the z-scores of housekeeping genes.
 }
 \description{
-This function generates a ggplot plot for the z-scores of housekeeping genes compared to random datasets.
+This function generates a ggplot plot for the z-scores of housekeeping genes
+compared to random datasets.
 }
