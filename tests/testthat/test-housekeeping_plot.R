@@ -9,10 +9,15 @@ test_that("housekeeping_plot return a ggplot", {
   )
   samplesheet <- parse_samplesheet(example_samplesheet)
   experiment <- load_experiment(samplesheet, fragdir)
-  housekeeping <- load_peaks(experiment |> dplyr::filter(target_label == "GeneHancer_housekeeping"),
-                     fragdir)
-  random <- load_peaks(experiment |> dplyr::filter(source_label == "random_dataset"),
-                       fragdir)
-  g <- housekeeping_plot(housekeeping, random)
+
+  housekeeping <- experiment |>
+    dplyr::filter(target_label == "GeneHancer_housekeeping")
+  housekeeping_data <- load_peaks(housekeeping, fragdir)
+
+  random <- experiment |>
+    dplyr::filter(source_label == "random_dataset")
+  random_data <- load_peaks(random, fragdir)
+
+  g <- housekeeping_plot(housekeeping_data, random_data)
   expect_true(ggplot2::is_ggplot(g))
 })

@@ -2,7 +2,8 @@
 #'
 #' This function plots a matrix of coverage data using ComplexHeatmap.
 #' @param matrix_data A data frame containing the matrix data to be plotted.
-#' @param palette A character string representing the color palette to be used for the plot.
+#' @param palette A character string representing the color palette
+#' to be used for the plot.
 #' @return A ComplexHeatmap object representing the plotted matrix.
 #' @importFrom stats quantile
 #' @export
@@ -36,8 +37,8 @@ matrix_plot <- function(matrix_data,
   rownames(mat) <- ordered_data$name
 
   # try to avoid outliers by using quantile
-  xmin <- min(mat, na.rm=TRUE)
-  xmax <- quantile(mat, na.rm=T, probs = c(.98))
+  xmin <- min(mat, na.rm = TRUE)
+  xmax <- quantile(mat, na.rm = TRUE, probs = c(.98))
 
   # color ramp
   col_fun <- circlize::colorRamp2(seq(xmin, xmax, length = 10),
@@ -78,8 +79,8 @@ matrix_plot <- function(matrix_data,
                                col = col_fun,
                                bottom_annotation = ba,
                                top_annotation = ta,
-                               height = ggplot2::unit(10,"cm"),
-                               width  = ggplot2::unit(3,"cm"),
+                               height = ggplot2::unit(10, "cm"),
+                               width  = ggplot2::unit(3, "cm"),
                                heatmap_legend_param = legend_param)
 
   h
