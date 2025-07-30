@@ -4,7 +4,15 @@
 \alias{load_sample}
 \title{Load data files from a sample directory}
 \usage{
-load_sample(caseid, sampleid, timepoint, encoded_timepoint, rootpath, subdir)
+load_sample(
+  caseid,
+  sampleid,
+  timepoint,
+  encoded_timepoint,
+  rootpath,
+  subdir,
+  skip_matrix_files
+)
 }
 \arguments{
 \item{caseid}{A character string specifying the case ID.}
@@ -18,7 +26,9 @@ load_sample(caseid, sampleid, timepoint, encoded_timepoint, rootpath, subdir)
 \item{rootpath}{A character string specifying the root path where the sample
 data is located.}
 
-\item{subdir}{A character string specifying the subdirectory
+\item{subdir}{A character string specifying the subdirectory}
+
+\item{skip_matrix_files}{A logical value indicating whether to skip loading
 within the root path where
 the sample data is located, defaults to "fragmentomics/processed".}
 }

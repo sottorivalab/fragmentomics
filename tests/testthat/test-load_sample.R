@@ -15,7 +15,8 @@ test_that("test load_sample from example dir structure", {
     timepoint = samplesheet$timepoint[1],
     encoded_timepoint = samplesheet$encoded_timepoint[1],
     rootpath = fragdir,
-    subdir = "fragmentomics/processed"
+    subdir = "fragmentomics/processed",
+    skip_matrix_files = FALSE
   )
 
   expect_true(tibble::is_tibble(results))
@@ -42,7 +43,8 @@ test_that("test load_samples fail with missing peak stats file", {
       timepoint = samplesheet$timepoint[1],
       encoded_timepoint = samplesheet$encoded_timepoint[1],
       rootpath = fragdir,
-      subdir = "fragmentomics/processed"
+      subdir = "fragmentomics/processed",
+      skip_matrix_files = FALSE
     ),
     "peak_stats_file path does not exist"
   )
@@ -69,7 +71,8 @@ test_that("test load_samples fail with missing peak data file", {
       timepoint = samplesheet$timepoint[1],
       encoded_timepoint = samplesheet$encoded_timepoint[1],
       rootpath = fragdir,
-      subdir = "fragmentomics/processed"
+      subdir = "fragmentomics/processed",
+      skip_matrix_files = FALSE
     ),
     "peak_data_file path does not exist"
   )
@@ -97,7 +100,8 @@ test_that("test load_samples fail with missing matrix file", {
       timepoint = samplesheet$timepoint[1],
       encoded_timepoint = samplesheet$encoded_timepoint[1],
       rootpath = fragdir,
-      subdir = "fragmentomics/processed"
+      subdir = "fragmentomics/processed",
+      skip_matrix_files = FALSE
     ),
     "matrix_file_name path does not exist"
   )

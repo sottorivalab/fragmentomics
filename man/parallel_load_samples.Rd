@@ -5,7 +5,7 @@
 \title{Load samples in parallel
 This function is intended to load samples in parallel}
 \usage{
-parallel_load_samples(samplesheet, rootpath, subdir)
+parallel_load_samples(samplesheet, rootpath, subdir, skip_matrix_files)
 }
 \arguments{
 \item{samplesheet}{A tibble containing the samplesheet data.}
@@ -13,7 +13,9 @@ parallel_load_samples(samplesheet, rootpath, subdir)
 \item{rootpath}{A character string specifying the
 root path where the sample data is located.}
 
-\item{subdir}{A character string specifying the
+\item{subdir}{A character string specifying the}
+
+\item{skip_matrix_files}{A logical value indicating whether to skip loading
 subdirectory within the root path where
 the sample data is located, defaults
 to "fragmentomics/processed/matrix".}

@@ -11,6 +11,7 @@ load_experiment(
   rootpath,
   subdir = "fragmentomics/processed",
   parallelize = TRUE,
+  skip_matrix_files = FALSE,
   number_of_daemons = parallel::detectCores()
 )
 }
@@ -29,6 +30,9 @@ to "fragmentomics/processed/matrix".}
 \item{parallelize}{A logical value indicating whether to parallelize the
 loading of sample data, defaults to TRUE.#' loading of sample data,
 defaults to TRUE.}
+
+\item{skip_matrix_files}{A logical value indicating whether to skip loading
+matrix files, defaults to FALSE.}
 
 \item{number_of_daemons}{An integer specifying the number of daemons to use}
 }

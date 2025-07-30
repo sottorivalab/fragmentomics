@@ -11,6 +11,7 @@
 #' @param rootpath A character string specifying the root path where the sample
 #' data is located.
 #' @param subdir A character string specifying the subdirectory
+#' @param skip_matrix_files A logical value indicating whether to skip loading
 #' within the root path where
 #' the sample data is located, defaults to "fragmentomics/processed".
 #' @export
@@ -20,7 +21,8 @@ load_sample <- function(
     timepoint,
     encoded_timepoint,
     rootpath,
-    subdir) {
+    subdir,
+    skip_matrix_files) {
 
   # sample root example: "results/SAMPLE_3/SAMPLE_3_PD/fragmentomics/processed"
   sample_root <- file.path(rootpath, caseid, sampleid, subdir)
@@ -53,14 +55,19 @@ load_sample <- function(
         }
 
         # find corresponding matrix file
-        matrix_path <- stringr::str_replace(target_dir, "peakstats", "matrix")
-        matrix_file_name <- file.path(matrix_path,
-                                      paste(basename(target_dir),
-                                            "_matrix.gz", sep = ""))
+        if (skip_matrix_files) {
+          matrix_file_name = NA
+        } else {
+          matrix_path <- stringr::str_replace(target_dir, "peakstats", "matrix")
+          matrix_file_name <- file.path(matrix_path,
+                                        paste(basename(target_dir),
+                                              "_matrix.gz", sep = ""))
 
-        if (!file.exists(matrix_file_name)) {
-          stop("matrix_file_name path does not exist: ", matrix_file_name)
+          if (!file.exists(matrix_file_name)) {
+            stop("matrix_file_name path does not exist: ", matrix_file_name)
+          }
         }
+
 
         # build tibble
         fragmentomics::parse_peak_stats(peak_stats_file) |>
