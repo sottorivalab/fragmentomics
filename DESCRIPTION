@@ -31,7 +31,8 @@ Imports:
   mirai (>= 2.4.0),
   parallel,
   ComplexHeatmap,
-  circlize
+  circlize,
+  grid
 Suggests: 
     knitr,
     rmarkdown,
