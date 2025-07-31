@@ -34,7 +34,7 @@ load_experiment <- function(samplesheet,
                             subdir = "fragmentomics/processed",
                             parallelize = TRUE,
                             skip_matrix_files = FALSE,
-                            number_of_daemons = parallel::detectCores()) {
+                            number_of_daemons = parallelly::availableCores()) {
 
   if (!file.exists(rootpath)) {
     stop("Root path does not exist: ", rootpath)

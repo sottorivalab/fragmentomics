@@ -12,7 +12,7 @@ load_experiment(
   subdir = "fragmentomics/processed",
   parallelize = TRUE,
   skip_matrix_files = FALSE,
-  number_of_daemons = parallel::detectCores()
+  number_of_daemons = parallelly::availableCores()
 )
 }
 \arguments{
