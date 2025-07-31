@@ -15,7 +15,7 @@ cohort_matrixes <- function(experiment,
   matrix_data <- lapply(heatmap_data, function(hpdata) {
     x <- hpdata |>
       dplyr::select(signal_label, target_label, signal) |>
-      dplyr::group_by(signal_label) |>
+      dplyr::group_by(signal_label, target_label) |>
       tidyr::pivot_wider(names_from = signal_label,
                          values_from = signal)
     y <- x |>
