@@ -1,16 +1,25 @@
+#' Cohort heatmap
+#' This function creates a heatmap for the cohort data in an experiment.
+#'
+#' @param experiment A tibble containing the experiment data.
+#' @param signal A character string specifying the signal to use for the heatmap.
+#' @param figure_title A character string specifying the title of the list of heatmaps.
+#'
+#' @returns A heatmap object.
 #' @export
 cohort_heatmap <- function(experiment,
-                           source_label,
-                           title = "Cohort heatmap") {
+                           signal = "central_coverage",
+                           figure_title = "Cohort heatmap") {
 
   figure_title_opt <- grid::gpar(fontsize = 14)
   heatmap_width <- ggplot2::unit(4, "cm")
   rownames_opt <- grid::gpar(fontsize = 4)
   colnames_opt <- grid::gpar(fontsize = 4)
 
-  matrix_data <- cohort_matrixes(experiment, source_label)
-  heatmap_legend <- ComplexHeatmap::Legend(col_fun = heatmap_color(matrix_data),
-                                           title = "Central coverage")
+  matrix_data <- cohort_matrixes(experiment)
+  heatmap_colorfun <- heatmap_color(matrix_data)
+  heatmap_legend <- ComplexHeatmap::Legend(col_fun = heatmap_colorfun,
+                                           title = signal)
 
   legend_list <- list(heatmap_legend)
 

@@ -18,6 +18,7 @@ utils::globalVariables(
     "encoded_timepoint",
     "target",
     "signal_label",
+    "target_label",
     "targetid",
     "peakfile",
     "central_bin",

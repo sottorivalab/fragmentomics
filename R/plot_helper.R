@@ -91,8 +91,16 @@ custom_legend <- function(labels = NULL,
 }
 
 
+#'
+#' Returns a color function for the combined matrix_data
+#' @param matrix_data A list of matrices to be used for color scaling.
+#' @param colors A character vector of 3 colors to be used in the heatmap.
+#' default: red, white, blue with red for negative values
+#' @return A color function that can be used for heatmaps.
+#'
+heatmap_color <- function(matrix_data,
+                          colors = c("red", "white", "blue")) {
 
-heatmap_color <- function(matrix_data) {
   # Get limits for an unified legend
   w <- purrr::list_c(lapply(matrix_data, function(mdata){
     as.vector(mdata)
@@ -103,7 +111,6 @@ heatmap_color <- function(matrix_data) {
                                   0,
                                   after = 1)
 
-  heatmap_colorfun <- circlize::colorRamp2(heatmap_limits,
-                                           c("red", "white", "blue"))
+  heatmap_colorfun <- circlize::colorRamp2(heatmap_limits, colors)
   heatmap_colorfun
 }
