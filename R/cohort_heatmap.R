@@ -16,6 +16,7 @@ cohort_heatmap <- function(experiment,
   rownames_opt <- grid::gpar(fontsize = 4)
   colnames_opt <- grid::gpar(fontsize = 4)
 
+  # TODO I should add the possibility to pass a martix directly
   matrix_data <- cohort_matrixes(experiment)
   heatmap_colorfun <- heatmap_color(matrix_data)
   heatmap_legend <- ComplexHeatmap::Legend(col_fun = heatmap_colorfun,
