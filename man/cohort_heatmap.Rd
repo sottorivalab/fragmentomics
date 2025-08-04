@@ -6,13 +6,13 @@
 This function creates a heatmap for the cohort data in an experiment.}
 \usage{
 cohort_heatmap(
-  experiment,
+  matrix_data,
   signal = "central_coverage",
   figure_title = "Cohort heatmap"
 )
 }
 \arguments{
-\item{experiment}{A tibble containing the experiment data.}
+\item{matrix_data}{A list of matrices containing the cohort data.}
 
 \item{signal}{A character string specifying the signal to use for the heatmap.}
 

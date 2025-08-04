@@ -1,13 +1,13 @@
 #' Cohort heatmap
 #' This function creates a heatmap for the cohort data in an experiment.
 #'
-#' @param experiment A tibble containing the experiment data.
+#' @param matrix_data A list of matrices containing the cohort data.
 #' @param signal A character string specifying the signal to use for the heatmap.
 #' @param figure_title A character string specifying the title of the list of heatmaps.
 #'
 #' @returns A heatmap object.
 #' @export
-cohort_heatmap <- function(experiment,
+cohort_heatmap <- function(matrix_data,
                            signal = "central_coverage",
                            figure_title = "Cohort heatmap") {
 
@@ -16,8 +16,6 @@ cohort_heatmap <- function(experiment,
   rownames_opt <- grid::gpar(fontsize = 4)
   colnames_opt <- grid::gpar(fontsize = 4)
 
-  # TODO I should add the possibility to pass a martix directly
-  matrix_data <- cohort_matrixes(experiment)
   heatmap_colorfun <- heatmap_color(matrix_data)
   heatmap_legend <- ComplexHeatmap::Legend(col_fun = heatmap_colorfun,
                                            title = signal)
