@@ -3,7 +3,7 @@
 \name{cohort_heatmap}
 \alias{cohort_heatmap}
 \title{Cohort heatmap
-This function creates a heatmap for the cohort data in an experiment.}
+This function creates a heatmap for the cohort data in a list of matrices}
 \usage{
 cohort_heatmap(
   matrix_data,
@@ -23,5 +23,5 @@ A heatmap object.
 }
 \description{
 Cohort heatmap
-This function creates a heatmap for the cohort data in an experiment.
+This function creates a heatmap for the cohort data in a list of matrices
 }

@@ -1,5 +1,5 @@
 #' Cohort heatmap
-#' This function creates a heatmap for the cohort data in an experiment.
+#' This function creates a heatmap for the cohort data in a list of matrices
 #'
 #' @param matrix_data A list of matrices containing the cohort data.
 #' @param signal A character string specifying the signal to use for the heatmap.

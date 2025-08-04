@@ -18,7 +18,10 @@ cohort_matrixes <- function(experiment,
       dplyr::group_by(signal_label, target_label) |>
       tidyr::pivot_wider(names_from = signal_label,
                          values_from = signal)
+
+    # this does not work because target_label is needed for group_by
     y <- x |>
+      dplyr::ungroup() |>
       dplyr::select(-target_label) |>
       as.matrix()
 
