@@ -18,10 +18,10 @@ cohort_matrixes <- function(experiment,
 
   matrix_data <- lapply(heatmap_data, function(hpdata) {
     x <- hpdata |>
-      dplyr::select(signal_label, target_label, signal) |>
+      dplyr::select(signal_label, target_label, all_of(signal)) |>
       dplyr::group_by(signal_label, target_label) |>
       tidyr::pivot_wider(names_from = signal_label,
-                         values_from = signal)
+                         values_from = all_of(signal))
 
     # this does not work because target_label is needed for group_by
     y <- x |>
