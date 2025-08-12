@@ -4,12 +4,16 @@
 \alias{cohort_matrixes}
 \title{Create a list of matrices for each timepoint in the experiment}
 \usage{
-cohort_matrixes(experiment, signal = "central_coverage")
+cohort_matrixes(experiment, signal = "central_coverage", scale_mode = "signal")
 }
 \arguments{
 \item{experiment}{A tibble containing the experiment data.}
 
 \item{signal}{A character string specifying the signal to use for the matrix.}
+
+\item{scale_mode}{A character string specifying the
+scaling method to use for the matrix.
+can be 'signal','target' or NA}
 }
 \value{
 A list of matrices, each corresponding to

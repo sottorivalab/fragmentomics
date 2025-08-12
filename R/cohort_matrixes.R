@@ -1,11 +1,15 @@
 #' Create a list of matrices for each timepoint in the experiment
 #' @param experiment A tibble containing the experiment data.
 #' @param signal A character string specifying the signal to use for the matrix.
+#' @param scale_mode A character string specifying the
+#' scaling method to use for the matrix.
+#' can be 'signal','target' or NA
 #' @return A list of matrices, each corresponding to
 #' a timepoint in the experiment.
 #' @export
 cohort_matrixes <- function(experiment,
-                            signal = "central_coverage") {
+                            signal = "central_coverage",
+                            scale_mode = "signal") {
 
   # make matrix by timepoints
   heatmap_data <- experiment |>
@@ -27,10 +31,14 @@ cohort_matrixes <- function(experiment,
 
     # set timepoint names
     row.names(y) <- x$target_label
-
-    # scale HERE
-    scale(y)
   })
 
-  matrix_data
+  # scale by signals or targets
+  if (scale_mode == 'signal') {
+    scale(matrix_data)
+  } else if (scale_mode == 'target') {
+    scale(t(matrix_data))
+  } else {
+    matrix_data
+  }
 }
