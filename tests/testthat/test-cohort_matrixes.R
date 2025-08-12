@@ -9,7 +9,10 @@ test_that("cohort_matrixes works", {
   )
   samplesheet <- parse_samplesheet(example_samplesheet)
   experiment <- load_experiment(samplesheet, fragdir) |>
-    dplyr::filter(source_label == "griffin")
+    dplyr::filter(source_label == "single_region_files")
+
+  # refator signal label
+  experiment <- experiment |> dplyr::mutate(signal_label = sampleid)
 
   # test cohort_matrixes
   matrixes <- cohort_matrixes(experiment)

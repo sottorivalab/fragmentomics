@@ -14,9 +14,11 @@ cohort_heatmap(
 \arguments{
 \item{matrix_data}{A list of matrices containing the cohort data.}
 
-\item{signal}{A character string specifying the signal to use for the heatmap.}
+\item{signal}{A character string specifying the
+signal to use for the heatmap.}
 
-\item{figure_title}{A character string specifying the title of the list of heatmaps.}
+\item{figure_title}{A character string specifying
+the title of the list of heatmaps.}
 }
 \value{
 A heatmap object.

@@ -2,8 +2,10 @@
 #' This function creates a heatmap for the cohort data in a list of matrices
 #'
 #' @param matrix_data A list of matrices containing the cohort data.
-#' @param signal A character string specifying the signal to use for the heatmap.
-#' @param figure_title A character string specifying the title of the list of heatmaps.
+#' @param signal A character string specifying the
+#' signal to use for the heatmap.
+#' @param figure_title A character string specifying
+#' the title of the list of heatmaps.
 #'
 #' @returns A heatmap object.
 #' @export
@@ -22,7 +24,7 @@ cohort_heatmap <- function(matrix_data,
 
   legend_list <- list(heatmap_legend)
 
-  heatmaps <- lapply(names(matrix_data), function(mname){
+  heatmaps <- lapply(names(matrix_data), function(mname) {
     mdata <- matrix_data[[mname]]
     h <- ComplexHeatmap::Heatmap(mdata,
                                  name = mname,
@@ -44,7 +46,7 @@ cohort_heatmap <- function(matrix_data,
 
   ComplexHeatmap::draw(ht_list,
                        annotation_legend_list = legend_list,
-                       heatmap_legend_side="bottom",
+                       heatmap_legend_side = "bottom",
                        column_title = figure_title,
                        column_title_gp = figure_title_opt)
 }

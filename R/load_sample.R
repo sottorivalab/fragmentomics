@@ -56,7 +56,7 @@ load_sample <- function(
 
         # find corresponding matrix file
         if (skip_matrix_files) {
-          matrix_file_name = NA
+          matrix_file_name <- NA
         } else {
           matrix_path <- stringr::str_replace(target_dir, "peakstats", "matrix")
           matrix_file_name <- file.path(matrix_path,

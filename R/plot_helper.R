@@ -102,14 +102,14 @@ heatmap_color <- function(matrix_data,
                           colors = c("red", "white", "blue")) {
 
   # Get limits for an unified legend
-  w <- purrr::list_c(lapply(matrix_data, function(mdata){
+  w <- purrr::list_c(lapply(matrix_data, function(mdata) {
     as.vector(mdata)
   }))
 
   # heatmap color ramp
   heatmap_limits <- base::append(stats::quantile(w, probs = c(0.01, 0.99)),
-                                  0,
-                                  after = 1)
+                                 0,
+                                 after = 1)
 
   heatmap_colorfun <- circlize::colorRamp2(heatmap_limits, colors)
   heatmap_colorfun

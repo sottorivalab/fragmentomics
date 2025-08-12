@@ -38,7 +38,7 @@ test_that("test load_experiment with non existent root dir", {
   )
 })
 
-test_that("test load_experiment with skip_matrix_files does not load matrices", {
+test_that("test load_experiment with skip_matrix_files", {
   tmpdir <- withr::local_tempdir()
   fragdir <- build_dir_structure(root = tmpdir)
 

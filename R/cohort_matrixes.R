@@ -31,13 +31,18 @@ cohort_matrixes <- function(experiment,
 
     # set timepoint names
     row.names(y) <- x$target_label
+    y
   })
 
   # scale by signals or targets
-  if (scale_mode == 'signal') {
-    scale(matrix_data)
-  } else if (scale_mode == 'target') {
-    scale(t(matrix_data))
+  if (scale_mode == "signal") {
+    matrix_data <- lapply(matrix_data, function(m) {
+      scale(m)
+    })
+  } else if (scale_mode == "target") {
+    matrix_data <- lapply(matrix_data, function(m) {
+      scale(t(m))
+    })
   } else {
     matrix_data
   }
